@@ -56,19 +56,27 @@ app.get(strategies.map(strategy => `/${strategy.type}`), (req, res, next) => {
 
 app.get(strategies.map(strategy => `/${strategy.type}/callback`), (req, res, next) => {
   const type = req.path.split('/')[1]
-  passport.authenticate(type, (err, user) => {
-    if (err && req.session.failureRedirect) {
+  passport.authenticate(type, (error, user) => {
+    if (error && req.session.failureRedirect) {
       res.clearCookie('user')
-      res.cookie('error', JSON.stringify(err), {domain: cookieDomain})
-      res.redirect(req.session.failureRedirect)
+      res.cookie('error', JSON.stringify(error), {domain: cookieDomain})
+      return res.redirect(req.session.failureRedirect)
     } else if (user && req.session.successRedirect) {
       res.clearCookie('error')
       res.cookie('user', JSON.stringify(user), {domain: cookieDomain})
-      res.redirect(req.session.successRedirect)
-    } else {
-      res.json(user)
+      return res.redirect(req.session.successRedirect)
     }
+    return res.json({error, user})
   })(req, res)
+})
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('user')
+  res.clearCookie('error')
+  if (req.query.redirect) {
+    return res.redirect(req.query.redirect)
+  }
+  return res.json({status: 'logged out'})
 })
 
 app.listen(port)
