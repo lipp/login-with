@@ -4,7 +4,7 @@ const strategies = {
   twitter: require('./twitter')
 }
 
-const env = require('./env')
+const env = require('../env')
 
 const isValidCreds = cred => (
   (cred.clientID && cred.clientSecret) || (cred.consumerKey && cred.consumerSecret)

@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-const strategies = require('./strategies')
+const strategies = require('./src/strategies')
 
 const port = parseInt(process.argv[2], 10) || 3000
 
