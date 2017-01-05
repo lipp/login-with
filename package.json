@@ -1,0 +1,36 @@
+{
+  "name": "login-with",
+  "version": "1.0.0",
+  "description": "Microservice for client side OAuth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipp/login-with.git"
+  },
+  "keywords": [
+    "oauth",
+    "login",
+    "microservice",
+    "twitter",
+    "reddit",
+    "github",
+    "google"
+  ],
+  "author": "Gerhard Preuss",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lipp/login-with/issues"
+  },
+  "homepage": "https://github.com/lipp/login-with#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.10",
+    "passport-reddit": "^0.2.4"
+  }
+}
