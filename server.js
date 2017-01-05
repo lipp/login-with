@@ -36,7 +36,7 @@ passport.deserializeUser((user, done) => done(null, user))
 const app = express()
 app.use(cookieParser())
 app.use(expressSession({
-  secret: 'keyboard cat',
+  secret: process.env.LW_SESSION_SECRET || 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }))
@@ -46,6 +46,8 @@ app.get(strategies.map(strategy => `/${strategy.type}`), (req, res, next) => {
   const type = req.path.split('/')[1]
   const strategy = strategies.find(strategy => strategy.type === type)
   const opts = {}
+  req.session.successRedirect = req.query.successRedirect
+  req.session.failureRedirect = req.query.failureRedirect
   if (strategy.preHook) {
     strategy.preHook(req, opts)
   }
@@ -55,8 +57,17 @@ app.get(strategies.map(strategy => `/${strategy.type}`), (req, res, next) => {
 app.get(strategies.map(strategy => `/${strategy.type}/callback`), (req, res, next) => {
   const type = req.path.split('/')[1]
   passport.authenticate(type, (err, user) => {
-    res.cookie('user', JSON.stringify(err || user), {domain: cookieDomain})
-    res.json(user)
+    if (err && req.session.failureRedirect) {
+      res.clearCookie('user')
+      res.cookie('error', JSON.stringify(err), {domain: cookieDomain})
+      res.redirect(req.session.failureRedirect)
+    } else if (user && req.session.successRedirect) {
+      res.clearCookie('error')
+      res.cookie('user', JSON.stringify(user), {domain: cookieDomain})
+      res.redirect(req.session.successRedirect)
+    } else {
+      res.json(user)
+    }
   })(req, res)
 })
 
