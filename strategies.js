@@ -1,24 +1,21 @@
 const strategies = {
   github: require('./github'),
-  reddit: require('./reddit')
+  reddit: require('./reddit'),
+  twitter: require('./twitter')
 }
 
-const getCreds = type => {
-  const TYPE = type.toUpperCase()
-  return {
-    clientID: process.env[`LW_${TYPE}_CLIENTID`],
-    clientSecret: process.env[`LW_${TYPE}_SECRET`],
-    callbackURL: process.env[`LW_${TYPE}_CALLBACKURL`]
-  }
-}
+const env = require('./env')
 
-const isValidCreds = cred => cred.clientID && cred.clientSecret && cred.callbackURL
+const isValidCreds = cred => (
+  (cred.clientID && cred.clientSecret) || (cred.consumerKey && cred.consumerSecret)
+)
 
 module.exports = Object.keys(strategies)
   .map(type => {
-    strategies[type].creds = getCreds(type)
-    strategies[type].type = type
-    return strategies[type]
+    const strategy = strategies[type]
+    strategy.creds = env[`${strategy.credsType}Creds`](type)
+    strategy.type = type
+    return strategy
   })
   .filter(strategy => isValidCreds(strategy.creds))
 

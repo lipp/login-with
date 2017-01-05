@@ -4,13 +4,29 @@ const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const strategies = require('./strategies')
 
+const port = parseInt(process.argv[2], 10) || 3000
+
+let subDomain = process.env.LW_SUBDOMAIN
+const protocol = process.env.LW_SUBDOMAIN ? 'https:/' : 'http:/'
+let cookieDomain
+if (subDomain) {
+  cookieDomain = '.' + subDomain.split('.').slice(1).join('.')
+  console.log(`Using subdomain "${subDomain}" for callback urls`)
+  console.log(`Cookie Domain is "${cookieDomain}"`)
+} else {
+  subDomain = `localhost:${port}`
+  console.log(`Using debug subdomain ${subDomain}, cookies will not be set`)
+}
+
 console.log(`Configured strategies: ${strategies.map(strategy => strategy.type).join('/')}`)
 
 strategies.forEach(strategy => {
   const handler = (accessToken, refreshToken, profile, done) => (
     done(null, {accessToken, refreshToken, profile})
   )
-  passport.use(new strategy.Ctor(strategy.creds, handler))
+  const config = strategy.creds
+  config.callbackURL = `${protocol}/${strategy.type}/callback`
+  passport.use(new strategy.Ctor(config, handler))
   console.log(`Using login with "${strategy.type}" strategy`)
 })
 
@@ -39,9 +55,9 @@ app.get(strategies.map(strategy => `/${strategy.type}`), (req, res, next) => {
 app.get(strategies.map(strategy => `/${strategy.type}/callback`), (req, res, next) => {
   const type = req.path.split('/')[1]
   passport.authenticate(type, (err, user) => {
-    res.cookie('user', JSON.stringify(err || user), {domain: '.now.sh'})
+    res.cookie('user', JSON.stringify(err || user), {domain: cookieDomain})
     res.json(user)
   })(req, res)
 })
 
-app.listen(3000)
+app.listen(port)

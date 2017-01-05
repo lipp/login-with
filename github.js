@@ -1,3 +1,4 @@
 module.exports = {
-  Ctor: require('passport-github2').Strategy
+  Ctor: require('passport-github2').Strategy,
+  credsType: 'client'
 }
