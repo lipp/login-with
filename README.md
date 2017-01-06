@@ -13,8 +13,12 @@ Running on https://login.now.sh for all *.now.sh websites which need user login/
 1. Generate an RSA Key pair.
 2. Use this as a login link
 
-```html
-<a href='https://login.now.sh/twitter?pubkey=YOUR_PUBKEY_HEX&successRedirect=YOUR_SITE_SUCCESS&failureRedirect=YOUR_SITE_FAILURE' />
+```jsx
+// no newlines of course
+<a href='https://login.now.sh/twitter
+	?pubkey=YOUR_PUBKEY_HEX
+	&successRedirect=YOUR_SITE_SUCCESS
+	&failureRedirect=YOUR_SITE_FAILURE' />
 ```
 
 ## Query Params
