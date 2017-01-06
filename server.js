@@ -3,6 +3,7 @@ const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const strategies = require('./src/strategies')
+const routes = require('./src/routes')
 
 const port = parseInt(process.argv[2], 10) || 3000
 
@@ -42,41 +43,10 @@ app.use(expressSession({
 }))
 app.use(passport.initialize())
 
-app.get(strategies.map(strategy => `/${strategy.type}`), (req, res, next) => {
-  const type = req.path.split('/')[1]
-  const strategy = strategies.find(strategy => strategy.type === type)
-  const opts = {}
-  req.session.successRedirect = req.query.successRedirect
-  req.session.failureRedirect = req.query.failureRedirect
-  if (strategy.preHook) {
-    strategy.preHook(req, opts)
-  }
-  passport.authenticate(type, opts)(req, res, next)
-})
-
-app.get(strategies.map(strategy => `/${strategy.type}/callback`), (req, res, next) => {
-  const type = req.path.split('/')[1]
-  passport.authenticate(type, (error, user) => {
-    if (error && req.session.failureRedirect) {
-      res.clearCookie('user')
-      res.cookie('error', JSON.stringify(error), {domain: cookieDomain})
-      return res.redirect(req.session.failureRedirect)
-    } else if (user && req.session.successRedirect) {
-      res.clearCookie('error')
-      res.cookie('user', JSON.stringify(user), {domain: cookieDomain})
-      return res.redirect(req.session.successRedirect)
-    }
-    return res.json({error, user})
-  })(req, res)
-})
-
-app.get('/logout', (req, res) => {
-  res.clearCookie('user')
-  res.clearCookie('error')
-  if (req.query.redirect) {
-    return res.redirect(req.query.redirect)
-  }
-  return res.json({status: 'logged out'})
-})
+if (strategies.length > 0) {
+  app.get(strategies.map(strategy => `/${strategy.type}`), routes.onAuthenticationRequest(strategies, passport))
+  app.get(strategies.map(strategy => `/${strategy.type}/callback`), routes.onAuthenticationCallback(strategies, passport))
+  app.get('/logout', routes.onLogout)
+}
 
 app.listen(port)
