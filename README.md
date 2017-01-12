@@ -1,3 +1,7 @@
+# ATTENTION: WORK IN PROGRESS
+
+NOT SECURE USING THIS YET
+
 # login-with
 
 Login-with microservice for OAuth on *.now.sh websites with encryption:
