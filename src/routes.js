@@ -1,4 +1,9 @@
-const ursa = require('ursa')
+const jwt = require('jsonwebtoken')
+
+const isFromLocalhost = (req) => (
+  req.headers.host.indexOf('http://localhost:') === 0 &&
+    decodeURIComponent(req.query.successRedirect || '').indexOf('http://localhost:') === 0
+)
 
 module.exports.onAuthenticationRequest = (strategies, passport) => (req, res, next) => {
   const type = req.path.split('/')[1]
@@ -7,45 +12,41 @@ module.exports.onAuthenticationRequest = (strategies, passport) => (req, res, ne
   const opts = {}
   req.session.successRedirect = req.query.successRedirect
   req.session.failureRedirect = req.query.failureRedirect
-  req.session.pubkey = req.query.pubkey
-  req.session.fromLocalhost = req.headers.referrer.indexOf('http://localhost:3000') === 0
+  req.session.fromLocalhost = isFromLocalhost(req)
   if (strategy.preHook) {
     strategy.preHook(req, opts)
   }
   passport.authenticate(type, opts)(req, res, next)
 }
 
-module.exports.onAuthenticationCallback = (strategies, passport, cookieDomain) => (req, res, next) => {
+module.exports.onAuthenticationCallback = ({strategies, passport, tokenCookieName, tokenSecret, profileCookieName, maxAge = false}) => (req, res, next) => {
   const type = req.path.split('/')[1]
   passport.authenticate(type, (error, user) => {
-    const cookieOpts = {}
-    if (req.session.fromLocalhost) {
-      const oneMinute = 1000 * 60
-      cookieOpts.maxAge = oneMinute
-    } else {
-      cookieOpts.domain = cookieDomain
-      cookieOpts.secore = true
-    }
-    const cookieName = req.session.pubkey
-    const pubkey = ursa.createPublicKey(decodeURIComponent(req.session.pubkey))
-    const cookieValue = pubkey.encrypt(JSON.stringify({error, user}), 'utf8', 'hex')
-    res.clearCookie(cookieName)
     if (error && req.session.failureRedirect) {
-      res.cookie(cookieName, cookieValue, cookieOpts)
+      res.clearCookie(tokenCookieName)
+      res.clearCookie(profileCookieName)
       return res.redirect(decodeURIComponent(req.session.failureRedirect))
     } else if (user && req.session.successRedirect) {
-      res.cookie(cookieName, cookieValue, cookieOpts)
+      res.cookie(tokenCookieName, jwt.sign(user, tokenSecret), {
+        secure: req.session.isFromLocalhost,
+        httpOnly: true,
+        maxAge: maxAge || req.session.isFromLocalhost ? 1000 * 60 : null
+      })
+      res.cookie(profileCookieName, JSON.stringify(user.profile), {
+        secure: req.session.isFromLocalhost,
+        maxAge: maxAge || req.session.isFromLocalhost ? 1000 * 60 : null
+      })
       return res.redirect(decodeURIComponent(req.session.successRedirect))
     }
     return res.json({error, user})
   })(req, res)
 }
 
-module.exports.onLogout = (req, res) => {
-  res.clearCookie('user')
-  res.clearCookie('error')
-  if (req.query.redirect) {
-    return res.redirect(req.query.redirect)
+module.exports.onLogout = ({tokenCookieName, profileCookieName}) => (req, res) => {
+  res.clearCookie(tokenCookieName)
+  res.clearCookie(profileCookieName)
+  if (req.query.successRedirect) {
+    return res.redirect(decodeURIComponent(req.query.successRedirect))
   }
   return res.json({status: 'logged out'})
 }

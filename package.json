@@ -31,10 +31,11 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "jsonwebtoken": "^7.2.1",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
     "passport-reddit": "^0.2.4",
-    "passport-twitter": "^1.0.4",
-    "ursa": "^0.9.4"
+    "passport-strategy": "^1.0.0",
+    "passport-twitter": "^1.0.4"
   }
 }
