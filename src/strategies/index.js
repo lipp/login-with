@@ -5,18 +5,15 @@ const strategies = {
   test: require('./test')
 }
 
-const env = require('../env')
+const isConfigured = strategy => strategy.config
 
-const isValidCreds = cred => (
-  (cred.clientID && cred.clientSecret) || (cred.consumerKey && cred.consumerSecret) || cred._test
-)
-
-module.exports = Object.keys(strategies)
+module.exports = (env, rootUrl) => Object.keys(strategies)
   .map(type => {
     const strategy = strategies[type]
-    strategy.creds = type === 'test' ? {_test: true} : env[`${strategy.credsType}Creds`](type)
+    const callbackURL = `${rootUrl}/${type}/callback`
+    strategy.config = strategy.getConfig(process.env, callbackURL)
     strategy.type = type
     return strategy
   })
-  .filter(strategy => isValidCreds(strategy.creds))
+  .filter(strategy => isConfigured(strategy))
 

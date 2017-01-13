@@ -2,7 +2,6 @@ const express = require('express')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-const strategies = require('./src/strategies')
 const routes = require('./src/routes')
 
 const port = parseInt(process.argv[2], 10) || 3000
@@ -19,16 +18,15 @@ if (!tokenSecret) {
   process.exit(1)
 }
 
-console.log(`Using subdomain "${subDomain}" for callback urls`)
+const rootUrl = protocol + '/' + subDomain
+
+console.log(`Using subdomain "${rootUrl}" for callback urls`)
+
+const strategies = require('./src/strategies')(process.env, rootUrl)
 console.log(`Configured strategies: ${strategies.map(strategy => strategy.type).join('/')}`)
 
 strategies.forEach(strategy => {
-  const handler = (accessToken, refreshToken, profile, done) => (
-    done(null, {accessToken, refreshToken, profile})
-  )
-  const config = strategy.creds
-  config.callbackURL = `${protocol}/${strategy.type}/callback`
-  passport.use(new strategy.Ctor(config, handler))
+  passport.use(new strategy.Ctor(strategy.config, strategy.toUser))
   console.log(`Using login with "${strategy.type}" strategy`)
 })
 
@@ -61,12 +59,13 @@ if (strategies.length > 0) {
     routes.onAuthenticationCallback({
       strategies,
       passport,
+      tokenSecret,
       tokenCookieName,
       profileCookieName
     })
   )
 
-  app.get('/logout', routes.onLogout)
+  app.get('/logout', routes.onLogout({tokenCookieName, profileCookieName}))
 }
 
 app.listen(port)
