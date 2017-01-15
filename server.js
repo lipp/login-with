@@ -11,6 +11,7 @@ const tokenCookieName = process.env.LW_TOKEN_COOKIENAME || 'token'
 const tokenSecret = process.env.LW_TOKEN_SECRET
 const sessionSecret = process.env.LW_SESSION_SECRET
 const subDomain = process.env.LW_SUBDOMAIN || `localhost:${port}`
+const cookieDomain = process.env.LW_SUBDOMAIN ? '.' + subDomain.split('.').slice(1).join('.') : null
 const protocol = process.env.LW_SUBDOMAIN ? 'https:/' : 'http:/'
 
 if (!tokenSecret) {
@@ -50,7 +51,8 @@ if (strategies.length > 0) {
       passport,
       tokenSecret,
       tokenCookieName,
-      profileCookieName
+      profileCookieName,
+      cookieDomain
     })
   )
 
@@ -61,7 +63,8 @@ if (strategies.length > 0) {
       passport,
       tokenSecret,
       tokenCookieName,
-      profileCookieName
+      profileCookieName,
+      cookieDomain
     })
   )
 
