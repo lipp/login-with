@@ -68,3 +68,7 @@ module.exports.onLogout = ({tokenCookieName, profileCookieName, cookieDomain}) =
   }
   return res.json({status: 'logged out'})
 }
+
+module.exports.onIndex = ({tokenCookieName, profileCookieName}) => (req, res) => {
+  return res.json({token: req.cookies[tokenCookieName], profile: req.cookies[profileCookieName]})
+}

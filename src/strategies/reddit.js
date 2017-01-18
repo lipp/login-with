@@ -12,7 +12,15 @@ module.exports = {
     }
   },
   toUser: (accessToken, refreshToken, profile, done) => {
-    done(null, {accessToken, refreshToken, profile})
+    done(null, {
+      accessToken,
+      refreshToken,
+      profile: {
+        displayName: profile.name,
+        provider: 'reddit',
+        photos: []
+      }
+    })
   },
   preHook: (req, opts) => {
     req.session.state = require('crypto').randomBytes(32).toString('hex')

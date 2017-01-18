@@ -12,6 +12,20 @@ module.exports = {
     }
   },
   toUser: (token, tokenSecret, profile, done) => {
-    done(null, {token, tokenSecret, profile})
+    const {photos, provider} = profile
+    const nameParts = profile.displayName ? profile.displayName.split(' ') : []
+    done(null, {
+      token,
+      tokenSecret,
+      profile: {
+        displayName: profile.username,
+        provider,
+        photo: photos[0].value,
+        name: {
+          givenName: nameParts[0],
+          familyName: nameParts[nameParts.length - 1]
+        }
+      }
+    })
   }
 }

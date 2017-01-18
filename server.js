@@ -68,7 +68,8 @@ if (strategies.length > 0) {
     })
   )
 
-  app.get('/logout', routes.onLogout({tokenCookieName, profileCookieName}))
+  app.get('/logout', routes.onLogout({tokenCookieName, profileCookieName, cookieDomain}))
+  app.get('/', routes.onIndex({tokenCookieName, profileCookieName}))
 }
 
 app.listen(port)
