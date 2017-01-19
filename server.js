@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
+const MemoryStore = require('session-memory-store')(expressSession)
 const routes = require('./src/routes')
 
 const port = parseInt(process.argv[2], 10) || 3000
@@ -13,9 +14,16 @@ const sessionSecret = process.env.LW_SESSION_SECRET
 const subDomain = process.env.LW_SUBDOMAIN || `localhost:${port}`
 const cookieDomain = process.env.LW_SUBDOMAIN ? '.' + subDomain.split('.').slice(1).join('.') : null
 const protocol = process.env.LW_SUBDOMAIN ? 'https:/' : 'http:/'
+const tenDays = 1000 * 60 * 60 * 24 * 10
+const maxAge = process.env.LW_COOKIE_MAXAGE || tenDays
 
 if (!tokenSecret) {
   console.error('no LW_TOKEN_SECRET env variable specified')
+  process.exit(1)
+}
+
+if (!sessionSecret) {
+  console.error('no LW_SESSION_SECRET env variable specified')
   process.exit(1)
 }
 
@@ -39,7 +47,8 @@ app.use(cookieParser())
 app.use(expressSession({
   secret: sessionSecret,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MemoryStore()
 }))
 app.use(passport.initialize())
 
@@ -52,7 +61,8 @@ if (strategies.length > 0) {
       tokenSecret,
       tokenCookieName,
       profileCookieName,
-      cookieDomain
+      cookieDomain,
+      maxAge
     })
   )
 
@@ -64,7 +74,8 @@ if (strategies.length > 0) {
       tokenSecret,
       tokenCookieName,
       profileCookieName,
-      cookieDomain
+      cookieDomain,
+      maxAge
     })
   )
 
