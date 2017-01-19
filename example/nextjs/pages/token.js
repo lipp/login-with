@@ -8,31 +8,39 @@ const fetchJson = async (url, headers) => {
   return res.json()
 }
 
+const fetchWithCookies = async (url, req) => {
+  const opts = {
+    credentials: 'include',
+    headers: {
+      cookie: req ? req.headers.cookie : null
+    }
+  }
+  return await fetchJson(url, opts)
+}
+
 export default class App extends React.Component {
-  static async getInitialProps ({req, profile}) {
-    if (req) {
-      try {
-        const token = await fetchJson('https://token-decryptor.now.sh', {
-          credentials: 'include',
-          headers: {
-            cookie: req.headers.cookie
-          }
-        })
-        return {token: {...token, foo: 123}}
-      } catch (error) {
-        return {token: {error: error.toString()}, foo: 333}
-      }
-    } else {
-      const token = await fetchJson('https://token-decryptor.now.sh', {
-        credentials: 'include'
-      })
+  static async getInitialProps ({req, profile = false}) {
+    try {
+      const token = await fetchWithCookies('https://token-decryptor.now.sh', req)
       return {token}
+    } catch (error) {
+      return {error: error.toString()}
     }
   }
 
   render () {
+    console.log(this.props)
+    const {token} = this.props
     return (
-      <div>{JSON.stringify(this.props.token || 'no token')}</div>
+      <div>
+        {token 
+          ? <div>
+              <div>{token.token}</div>
+              <div>{JSON.stringify(token.decrypted)}</div>
+            </div>
+          : null}
+        }
+      </div>
     )
   }
 }
