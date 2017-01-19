@@ -83,3 +83,16 @@ Don't forget to `encodeURIComponent` on them.
 # Example
 
 Checkout [login-example.now.sh](https://login-example.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
+
+# Deployment with now
+
+1. Create your secrets for the environment variables
+2. Deploy
+```sh
+now -e NODE_ENV=production -e LW_SUBDOMAIN=login.yourdomain.com -e LW_SESSION_SECRET=@lw-session-secret \
+	-e LW_TOKEN_SECRET=@lw-token-secret \
+	-e LW_REDDIT_CLIENTID=@lw-reddit-clientid -e LW_REDDIT_CLIENTSECRET=@lw-reddit-clientsecret \
+	-e LW_GITHUB_CLIENTID=@lw-github-clientid -e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
+	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey -e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	--alias login.yourdomain.com
+``` 
