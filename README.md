@@ -82,5 +82,4 @@ Don't forget to `encodeURIComponent` on them.
 
 # Example
 
-Checkout (login-example.now.sh)[https://login-example.now.sh]. The source code is (here)[https://github.com/lipp/login-with/tree/master/example/nextjs].
-
+Checkout [login-example.now.sh](https://login-example.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
