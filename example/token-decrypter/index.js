@@ -1,6 +1,7 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken')
+const url = require('url')
 const tokenSecret = process.env.LW_TOKEN_SECRET
 
 if (!tokenSecret) {
@@ -11,13 +12,22 @@ if (!tokenSecret) {
 const app = express()
 app.use(cookieParser())
 app.get('/', (req, res) => {
-  const token = req.cookies.token
-  if (!token) {
-    return res.json({error: 'no token cookie'})
-  }
   try {
-    const decoded = jwt.verify(token, tokenSecret)
-    return res.json(decoded)
+    const token = req.cookies.token
+    const {protocol, hostname} = url.parse(req.headers.referer)
+    const origin = `${protocol}//${hostname}`
+    res.header('Access-Control-Allow-Origin', origin)
+    res.header('Access-Control-Allow-Credentials', 'true')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    if (!token) {
+      return res.json({error: 'no token cookie'})
+    }
+    try {
+      const decrypted = jwt.verify(token, tokenSecret)
+      return res.json({token, decrypted})
+    } catch (error) {
+      res.json({error})
+    }
   } catch (error) {
     res.json({error})
   }
