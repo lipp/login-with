@@ -9,6 +9,12 @@ Stateless authentication microservice for "login-with" functionality, supporting
 
 This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 
+```html
+<a href='https://login.yourdomain.com/twitter?successRedirect=ON_SUCCESS_URL&failureRedirect=ON_FAILURE_URL>
+  Login with Twitter
+</a>
+```
+
 On successfull login two cookies will be created:
 
 - `token` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
@@ -61,15 +67,18 @@ must be: `https://login.yourdomain.com/twitter/callback`
 - `LW_TWITTER_CONSUMERSECRET` - Your Twitter Consumer Secret
 
 
-# Login Endpoints
+# Endpoints
 
 - `/twitter` - login with Twitter account (if configured through env variables)
 - `/github` - login with GitHub account (if configured through env variables)
 - `/reddit` - login with Reddit account (if configured through env variables)
+- `/logout` - logout and clears the respective cookies
 
-All login endpoints expect the query parameteres:
+All endpoints expect the query parameteres:
 - `successRedirect` A url to redirect to in case of successful login (use `encodeURIComponent` for proper escaping)
 - `failureRedirect` A url to redirect to in case of failed login (use `encodeURIComponent` for proper escaping)
+
+Don't forget to `encodeURIComponent` on them.
 
 # Example
 
