@@ -1,7 +1,7 @@
 {
   "name": "login-with",
   "version": "1.0.0",
-  "description": "Microservice for client side OAuth",
+  "description": "Stateless microservice for authentication with OAuth etc.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +19,8 @@
     "twitter",
     "reddit",
     "github",
-    "google"
+    "google",
+    "passport"
   ],
   "author": "Gerhard Preuss",
   "license": "MIT",
