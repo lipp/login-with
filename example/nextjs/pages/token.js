@@ -1,7 +1,6 @@
 import React from 'react'
-import cookie from 'cookie'
-import Cookies from 'js-cookie'
 import 'isomorphic-fetch'
+import withProfile from '../with-profile'
 
 const fetchJson = async (url, headers) => {
   const res = await fetch(url, headers)
@@ -18,7 +17,7 @@ const fetchWithCookies = async (url, req) => {
   return await fetchJson(url, opts)
 }
 
-export default class App extends React.Component {
+class Token extends React.Component {
   static async getInitialProps ({req, profile = false}) {
     try {
       const token = await fetchWithCookies('https://token-decryptor.now.sh', req)
@@ -29,18 +28,19 @@ export default class App extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     const {token} = this.props
     return (
       <div>
-        {token 
+        {token
           ? <div>
-              <div>{token.token}</div>
-              <div>{JSON.stringify(token.decrypted)}</div>
-            </div>
-          : null}
+            <div>{token.token}</div>
+            <div>{JSON.stringify(token.decrypted)}</div>
+          </div>
+          : null
         }
       </div>
     )
   }
 }
+
+export default withProfile({Component: Token, autoRedirect: true})
