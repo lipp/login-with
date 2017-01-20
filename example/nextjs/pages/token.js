@@ -1,6 +1,7 @@
 import React from 'react'
 import 'isomorphic-fetch'
 import withProfile from '../with-profile'
+import Header from '../Header'
 
 const fetchJson = async (url, headers) => {
   const res = await fetch(url, headers)
@@ -28,9 +29,10 @@ class Token extends React.Component {
   }
 
   render () {
-    const {token} = this.props
+    const {token, profile, origin} = this.props
     return (
       <div>
+        <Header profile={profile} origin={origin} />
         {token
           ? <div>
             <div>{token.token}</div>

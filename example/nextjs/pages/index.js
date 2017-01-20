@@ -1,5 +1,6 @@
 import React from 'react'
 import withProfile from '../with-profile'
+import Header from '../Header'
 import Link from 'next/link'
 
 const Profile = ({profile}) => (
@@ -10,24 +11,17 @@ const Profile = ({profile}) => (
   </div>
 )
 
-class App extends React.Component {
-  static async getInitialProps (args) {
-    return {bla: 123}
-  }
-  render () {
-    const {profile} = this.props
-    return (
-      <div>
-        { profile
-          ? <div>
-              <Profile profile={profile} />
-              <span>View your profile <Link href='/token'><a>token</a></Link></span>
-            </div>
-          : <span>You need to <Link href='/login'><a>login</a></Link></span>
-        }
+const App = ({profile, origin}) => (
+  <div>
+    <Header profile={profile} origin={origin} />
+    { profile
+      ? <div>
+        <Profile profile={profile} />
+        <span>View your profile <Link href='/token'><a>token</a></Link></span>
       </div>
-    )
-  }
-}
+      : <span>You need to <Link href='/login'><a>login</a></Link></span>
+    }
+  </div>
+)
 
 export default withProfile({Component: App})
