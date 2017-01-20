@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "micro"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cookie-parser": "^1.4.3",
-    "express": "^4.14.0",
-    "jsonwebtoken": "^7.2.1"
+    "cookie": "^0.3.1",
+    "jsonwebtoken": "^7.2.1",
+    "micro": "^6.2.0"
   }
 }
