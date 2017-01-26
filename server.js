@@ -8,8 +8,8 @@ const routes = require('./src/routes')
 const port = parseInt(process.argv[2], 10) || 3000
 
 const profileCookieName = process.env.LW_PROFILE_COOKIENAME || 'profile'
-const tokenCookieName = process.env.LW_TOKEN_COOKIENAME || 'token'
-const tokenSecret = process.env.LW_TOKEN_SECRET
+const tokenCookieName = process.env.LW_JWT_COOKIENAME || 'jwt'
+const tokenSecret = process.env.LW_JWT_SECRET
 const sessionSecret = process.env.LW_SESSION_SECRET
 const subDomain = process.env.LW_SUBDOMAIN || `localhost:${port}`
 const cookieDomain = process.env.LW_SUBDOMAIN ? '.' + subDomain.split('.').slice(1).join('.') : null

@@ -33,14 +33,15 @@ The configuration is done solely through environment variables.
 ## Required environment variables
 
 - `LW_SESSION_SECRET` - The session secret used by the microservice
-- `LW_TOKEN_SECRET` - The secret to sign the JSON Web Token (JWT)
-- `LW_TOKEN_SUBDOMAIN` - The subdomain this microservice runs, e.g. `login.yourdomain.com`
+- `LW_JWT_SECRET` - The secret to sign the JSON Web Token (JWT)
+- `LW_SUBDOMAIN` - The subdomain this microservice runs, e.g. `login.yourdomain.com`.
+  All other subdomains (e.g. `api.yourdomain.com`) and the top-level (e.g. `yourdomain.com`) 
 
 ## Optional environment variables
 
 - `LW_COOKIE_MAXAGE` - The max age of the store cookie, defaults to 10 days
 - `LW_PROFILE_COOKIENAME` - The profile's cookie name, defaults to `profile`
-- `LW_TOKEN_COOKIENAME` - The JSON Web Token's (JWT) cookie name, defaults to `token`
+- `LW_JWT_COOKIENAME` - The JSON Web Token's (JWT) cookie name, defaults to `jwt`
 
 ## GitHub specific environment variables
 
@@ -75,8 +76,8 @@ must be: `https://login.yourdomain.com/twitter/callback`
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameteres:
-- `successRedirect` A url to redirect to in case of successful login (use `encodeURIComponent` for proper escaping)
-- `failureRedirect` A url to redirect to in case of failed login (use `encodeURIComponent` for proper escaping)
+- `success` A url to redirect to in case of successful login (use `encodeURIComponent` for proper escaping)
+- `failure` A url to redirect to in case of failed login (use `encodeURIComponent` for proper escaping)
 
 Don't forget to `encodeURIComponent` on them.
 

@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-now -e LW_TOKEN_SECRET=@lw-token-secret --alias token-decryptor.now.sh
+now -e LW_JWT_SECRET=@lw-token-secret --alias token-decryptor.now.sh

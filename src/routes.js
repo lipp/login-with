@@ -4,8 +4,8 @@ module.exports.onAuthenticationRequest = ({strategies, passport}) => (req, res, 
   const type = req.path.split('/')[1]
   const strategy = strategies.find(strategy => strategy.type === type)
   const opts = {}
-  req.session.successRedirect = req.query.successRedirect
-  req.session.failureRedirect = req.query.failureRedirect
+  req.session.success = req.query.success
+  req.session.failure = req.query.failure
   if (strategy.preHook) {
     strategy.preHook(req, opts)
   }
@@ -34,8 +34,8 @@ module.exports.onAuthenticationCallback = ({strategies, passport, tokenCookieNam
         domain: cookieDomain,
         maxAge
       }))
-      if (req.session.failureRedirect) {
-        return res.redirect(decodeURIComponent(req.session.failureRedirect))
+      if (req.session.failure) {
+        return res.redirect(decodeURIComponent(req.session.failure))
       }
     } else if (user) {
       res.cookie(tokenCookieName, jwt.sign(user, tokenSecret), cookieOpts({
@@ -48,8 +48,8 @@ module.exports.onAuthenticationCallback = ({strategies, passport, tokenCookieNam
         domain: cookieDomain,
         maxAge
       }))
-      if (req.session.successRedirect) {
-        return res.redirect(decodeURIComponent(req.session.successRedirect))
+      if (req.session.success) {
+        return res.redirect(decodeURIComponent(req.session.success))
       }
     }
     return res.json({error, user})
@@ -67,8 +67,9 @@ module.exports.onLogout = ({tokenCookieName, profileCookieName, cookieDomain}) =
     httpOnly: false,
     domain: cookieDomain
   }))
-  if (req.query.successRedirect) {
-    return res.redirect(decodeURIComponent(req.query.successRedirect))
+  console.log(req.query)
+  if (req.query.success) {
+    return res.redirect(decodeURIComponent(req.query.success))
   }
   return res.json({status: 'logged out'})
 }

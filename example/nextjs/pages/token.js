@@ -1,7 +1,8 @@
+/* globals fetch */
 import React from 'react'
 import 'isomorphic-fetch'
 import withProfile from '../with-profile'
-import Header from '../Header'
+import withLayout from '../with-layout'
 
 const fetchJson = async (url, headers) => {
   const res = await fetch(url, headers)
@@ -21,28 +22,27 @@ const fetchWithCookies = async (url, req) => {
 class Token extends React.Component {
   static async getInitialProps ({req, profile = false}) {
     try {
-      const token = await fetchWithCookies('https://token-decryptor.now.sh', req)
-      return {token}
+      const result = await fetchWithCookies('https://token-decryptor.now.sh', req)
+      return {result}
     } catch (error) {
       return {error: error.toString()}
     }
   }
 
   render () {
-    const {token, profile, origin} = this.props
+    const {result, error} = this.props
     return (
       <div>
-        <Header profile={profile} origin={origin} />
-        {token
+        {result
           ? <div>
-            <div>{token.token}</div>
-            <div>{JSON.stringify(token.decrypted)}</div>
+            <div>{result.jwt}</div>
+            <div>{JSON.stringify(result.decrypted)}</div>
           </div>
-          : null
+          : <span>something went wrong: {error}</span>
         }
       </div>
     )
   }
 }
 
-export default withProfile({Component: Token, autoRedirect: true})
+export default withProfile({Component: withLayout(Token), autoRedirect: true})

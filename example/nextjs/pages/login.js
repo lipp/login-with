@@ -1,10 +1,10 @@
 import React from 'react'
 import withProfile from '../with-profile'
-import Header from '../Header'
+import withLayout from '../with-layout'
 
 const LoginWith = ({service, redirect}) => (
   <div className={'login ' + service.toLowerCase()} >
-    <a href={`https://login.now.sh/${service.toLowerCase()}?successRedirect=${redirect}&failureRedirect=${redirect}`} >
+    <a href={`https://login.now.sh/${service.toLowerCase()}?success=${redirect}&failure=${redirect}`} >
       Login with {service}
     </a>
   </div>
@@ -12,10 +12,9 @@ const LoginWith = ({service, redirect}) => (
 
 const Login = ({profile, origin}) => {
   const redirect = encodeURIComponent(origin + '/')
-  const logoutLink = `https://login.now.sh/logout?successRedirect=${redirect}`
+  const logoutLink = `https://login.now.sh/logout?success=${redirect}`
   return (
     <div>
-      <Header profile={profile} origin={origin} />
       { !profile && <LoginWith service='Twitter' redirect={redirect} /> }
       { !profile && <LoginWith service='GitHub' redirect={redirect} /> }
       { profile && <span>You are already logged in with {profile.provider}. Click <a href={logoutLink}>here</a> to logout.</span> }
@@ -23,4 +22,4 @@ const Login = ({profile, origin}) => {
   )
 }
 
-export default withProfile({Component: Login})
+export default withProfile({Component: withLayout(Login)})

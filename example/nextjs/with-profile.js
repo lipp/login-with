@@ -34,18 +34,8 @@ export default ({Component, autoRedirect = false}) => (
       }
     }
 
-    state = {
-      origin: ''
-    }
-  
-    componentDidMount () {
-      this.setState({
-        origin: window.location.origin
-      })
-    }
-
     render () {
-      return <Component {...this.props} origin={this.state.origin} />
+      return <Component {...this.props} />
     }
   }
 )

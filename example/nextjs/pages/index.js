@@ -1,6 +1,6 @@
 import React from 'react'
 import withProfile from '../with-profile'
-import Header from '../Header'
+import withLayout from '../with-layout'
 import Link from 'next/link'
 
 const Profile = ({profile}) => (
@@ -11,9 +11,8 @@ const Profile = ({profile}) => (
   </div>
 )
 
-const App = ({profile, origin}) => (
+const Index = ({profile, origin}) => (
   <div>
-    <Header profile={profile} origin={origin} />
     { profile
       ? <div>
         <Profile profile={profile} />
@@ -24,4 +23,4 @@ const App = ({profile, origin}) => (
   </div>
 )
 
-export default withProfile({Component: App})
+export default withProfile({Component: withLayout(Index)})

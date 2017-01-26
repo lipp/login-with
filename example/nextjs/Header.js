@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default ({profile = false, origin}) => {
   const redirect = encodeURIComponent(origin + '/')
-  const logoutLink = `https://login.now.sh/logout?successRedirect=${redirect}`
+  const logoutLink = `https://login.now.sh/logout?success=${redirect}`
   return (
     <header>
       {profile

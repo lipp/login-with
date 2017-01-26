@@ -2,7 +2,6 @@
   "name": "login-with-nextjs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
