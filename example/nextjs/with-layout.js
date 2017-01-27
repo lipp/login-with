@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import Header from './Header'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 
 export default (Component) => (
@@ -33,6 +34,12 @@ export default (Component) => (
           <div className='container'>
             <Component {...this.props} origin={origin} />
           </div>
+          <Footer />
+          <style jsx>{`
+            .layout > .container {
+              min-height: 80vh;
+            }
+          `}</style>
         </div>
       )
     }
