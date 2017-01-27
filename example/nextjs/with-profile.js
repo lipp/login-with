@@ -8,7 +8,18 @@ export default ({Component, autoRedirect = false}) => (
     static async getInitialProps (args) {
       const {req, res} = args
       let profile
-      if (req) {
+      if (process.env.DEBUG || (!req && window.location.origin === 'http://localhost:3000')) {
+        console.log('debug profile')
+        profile = JSON.stringify({
+          displayName: 'lipplocal',
+          name: {
+            givenName: 'Gerhard',
+            familyName: 'Lipp'
+          },
+          photo: 'https://avatars.githubusercontent.com/u/445883?v=3',
+          provider: 'github'
+        })
+      } else if (req) {
         const cookies = cookie.parse(req.headers.cookie || '')
         profile = cookies.profile
       } else {

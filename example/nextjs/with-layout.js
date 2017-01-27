@@ -1,5 +1,7 @@
 import React from 'react'
+import Head from 'next/head'
 import Header from './Header'
+
 
 export default (Component) => (
   class WithLayout extends React.Component {
@@ -21,18 +23,16 @@ export default (Component) => (
       const {origin} = this.state
       const {profile} = this.props
       return (
-        <div>
+        <div className='layout'>
+          <Head>
+            <meta name='viewport' content='width=device-width, initial-scale=1' />
+            <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css' />
+            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' />
+          </Head>
           <Header profile={profile} origin={origin} />
-          <Component {...this.props} origin={origin} />
-          <style jsx global>{`
-            body {
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-              font-size: 14px;
-              line-height: 1.5;
-              color: #333;
-              background-color: #fff;
-            }
-          `}</style>
+          <div className='container'>
+            <Component {...this.props} origin={origin} />
+          </div>
         </div>
       )
     }
