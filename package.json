@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Stateless microservice for authentication with OAuth etc.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test",
     "start": "node server.js"
   },
   "repository": {
@@ -38,5 +38,9 @@
     "passport-strategy": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "session-memory-store": "^0.2.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   }
 }
