@@ -20,7 +20,7 @@ const cookieOpts = ({httpOnly, reset = false, domain, maxAge = false}) => ({
   maxAge: !reset ? maxAge : maxAge
 })
 
-module.exports.onAuthenticationCallback = ({strategies, passport, tokenCookieName, tokenSecret, profileCookieName, cookieDomain, maxAge = false}) => (req, res, next) => {
+module.exports.onAuthenticationCallback = ({passport, tokenCookieName, tokenSecret, profileCookieName, cookieDomain, maxAge = false}) => (req, res, next) => {
   const type = req.path.split('/')[1]
   passport.authenticate(type, (error, user) => {
     if (error) {
@@ -67,7 +67,6 @@ module.exports.onLogout = ({tokenCookieName, profileCookieName, cookieDomain}) =
     httpOnly: false,
     domain: cookieDomain
   }))
-  console.log(req.query)
   if (req.query.success) {
     return res.redirect(decodeURIComponent(req.query.success))
   }
