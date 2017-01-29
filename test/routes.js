@@ -2,6 +2,7 @@
 const routes = require('../src/routes')
 const sinon = require('sinon')
 const assert = require('assert')
+const jwt = require('jsonwebtoken')
 
 describe('the routes module', () => {
   let sandbox
@@ -150,6 +151,138 @@ describe('the routes module', () => {
       tokenCookieName: 'token', 
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar'
+    })(req, res)
+  })
+
+  it('onAuthenticationCallback sets cookies on success', done => {
+    const req = {
+      path: '/foo',
+      session: {
+        success: encodeURIComponent('http://foo.bar/ok')
+      }
+    }
+    const user = {
+      accessToken: 'asdlaksjd',
+      profile: {
+        displayName: 'baz'
+      }
+    }
+    const secret = 'asdlkjasdlkjasd'
+    let profileSet
+    let tokenSet
+    const res = {
+      cookie: (name, content, opts) => {
+        assert(opts.secure)
+        assert.equal(opts.maxAge, 1000)
+        assert.equal(opts.domain, '.foo.bar')
+        if (name === 'profile') {
+          assert(!opts.httpOnly)
+          assert.equal(content, JSON.stringify(user.profile))
+          profileSet = true
+        }
+        if (name === 'token') {
+          assert(opts.httpOnly)
+          const decrypted = jwt.verify(content, secret)
+          assert.deepEqual(decrypted.profile, user.profile)
+          assert.equal(decrypted.accessToken, user.accessToken)
+          tokenSet = true
+        }
+      },
+      redirect: location => {
+        assert.equal(location, 'http://foo.bar/ok')
+        assert(profileSet && tokenSet)
+        done()
+      }
+    }
+    routes.onAuthenticationCallback({
+      passport: {
+        authenticate: (type, next) => (_req, _res) => {
+          assert.equal(type, 'foo')
+          next(null, user)
+        }
+      },
+      tokenCookieName: 'token', 
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar',
+      tokenSecret: secret,
+      maxAge: 1000
+    })(req, res)
+  })
+
+  it('onAuthenticationCallback clear cookies on error', done => {
+    const req = {
+      path: '/foo',
+      session: {
+        failure: encodeURIComponent('http://foo.bar/fail')
+      }
+    }
+    const error = 'foo'
+    const secret = 'asdlkjasdlkjasd'
+    const res = {
+      cookie: (name, content, opts) => {
+        assert(opts.secure)
+        assert(opts.expires <= new Date())
+        assert.equal(opts.domain, '.foo.bar')
+        if (name === 'profile') {
+          assert.equal(content, JSON.stringify({error}))
+          assert(!opts.httpOnly)
+          profileDeleted = true
+        }
+        if (name === 'token') {
+          assert.equal(content, '')
+          assert(opts.httpOnly)
+          tokenDeleted = true
+        }
+      },
+      redirect: location => {
+        assert.equal(location, 'http://foo.bar/fail')
+        assert(profileDeleted && tokenDeleted)
+        done()
+      }
+    }
+    routes.onAuthenticationCallback({
+      passport: {
+        authenticate: (type, next) => (_req, _res) => {
+          assert.equal(type, 'foo')
+          next(error)
+        }
+      },
+      tokenCookieName: 'token', 
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar',
+      tokenSecret: secret,
+      maxAge: 1000
+    })(req, res)
+  })
+
+  it('onAuthenticationCallback call res.json if redirect specified', done => {
+    const req = {
+      path: '/foo',
+      session: {}
+    }
+    const error = 'foo'
+    const user = 123
+    const secret = 'asdlkjasdlkjasd'
+    const res = {
+      cookie: () => {},
+      json: object => {
+        assert.equal(object.error, error)
+        assert.equal(object.user, user)
+        done()
+      }
+    }
+    routes.onAuthenticationCallback({
+      passport: {
+        authenticate: (type, next) => (_req, _res) => {
+          assert.equal(type, 'foo')
+          next(error, user)
+        }
+      },
+      tokenCookieName: 'token', 
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar',
+      tokenSecret: secret,
+      maxAge: 1000
     })(req, res)
   })
 })
