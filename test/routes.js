@@ -76,4 +76,80 @@ describe('the routes module', () => {
       })(req, res, next)
     })
   })
+
+  it('onIndex calls res.json({token, profile})', done => {
+    const res = {
+      json: object => {
+        assert.equal(object.token, req.cookies.token)
+        assert.deepEqual(object.profile, req.cookies.profile)
+        done()
+      }
+    }
+    const req = {
+      cookies: {
+        token: 'asd.fhfj.ppp',
+        profile: {
+          displayName: 'foo'
+        }
+      }
+    }
+    routes.onIndex({tokenCookieName: 'token', profileCookieName: 'profile'})(req, res)
+  })
+
+  it('onLogout clears cookies', done => {
+    const req = {
+      query: {
+        success: encodeURIComponent('http://foo.bar/login')
+      }
+    }
+    let profileDeleted
+    let tokenDeleted
+    const res = {
+      cookie: (name, content, opts) => {
+        assert.equal(content, '')
+        assert(opts.secure)
+        assert(opts.expires <= new Date())
+        assert.equal(opts.domain, '.foo.bar')
+        if (name === 'profile') {
+          assert(!opts.httpOnly)
+          profileDeleted = true
+        }
+        if (name === 'token') {
+          assert(opts.httpOnly)
+          tokenDeleted = true
+        }
+      },
+      redirect: location => {
+        assert.equal(location, 'http://foo.bar/login')
+        assert(profileDeleted && tokenDeleted)
+        done()
+      }
+    }
+    routes.onLogout({
+      tokenCookieName: 'token', 
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar'
+    })(req, res)
+  })
+
+  it('onLogout calls res.json({status}) if no req.query.success', done => {
+    const req = {
+      query: {}
+    }
+    const res = {
+      cookie: () => {},
+      redirect: () => {},
+      json: object => {
+        assert.deepEqual(object, {
+          status: 'logged out'
+        })
+        done()
+      }
+    }
+    routes.onLogout({
+      tokenCookieName: 'token', 
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar'
+    })(req, res)
+  })
 })
