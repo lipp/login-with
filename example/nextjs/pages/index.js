@@ -30,15 +30,17 @@ const Index = ({profile, origin}) => (
       }
       li {
         padding-left: 1em;
-        text-indent: -1em;
+        text-indent: -2em;
+        font-weight: bolder;
       }
       li:before {
         content: '*';
-        font-size: 120%;
+        font-size: 180%;
         color: #e40dbc;
-        margin-right: 0.5em;
+        margin-right: 0.3em;
         position: relative;
-        top: 5px;
+        top: 0.35em;
+        line-height: 0.5em;
       }
       .notification {
         font-family: monospace;

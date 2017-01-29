@@ -9,6 +9,13 @@ const LoginWith = ({service, redirect}) => (
       <span className='icon is-medium'><i className={`fa fa-${service.toLowerCase()}`} /></span>
       <span>Login with <strong>{service}</strong></span>
     </a>
+    <style jsx>{`
+      .login {
+        margin: 3em 0;
+        display: flex;
+        justify-content: center;
+      }
+    `}</style>
   </div>
 )
 
@@ -32,16 +39,12 @@ const Login = ({profile, origin}) => {
         evil happens to your login data at any point.
       </p>
       <style jsx>{`
-        .login {
-          margin: 3em 0;
-          display: flex;
-          justify-content: center;
-        }
         p:first-of-type {
           margin-top: 7em;
         }
         p {
           margin: 2em auto;
+          max-width: 600px;
         }
       `}</style>
     </div>
