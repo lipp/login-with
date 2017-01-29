@@ -12,20 +12,17 @@ module.exports = {
     }
   },
   toUser: (accessToken, refreshToken, profile, done) => {
-    const nameParts = profile.displayName ? profile.displayName.split(' ') : []
     let avatar
     try {
       avatar = JSON.parse(profile._raw).avatar_url
     } catch (error) {}
+    const {username, displayName} = profile
     done(null, {
       accessToken,
       refreshToken,
       profile: {
-        displayName: profile.username,
-        name: {
-          familyName: nameParts[nameParts.length - 1],
-          givenName: nameParts[0]
-        },
+        username,
+        name: displayName,
         provider: 'github',
         photo: avatar
       }

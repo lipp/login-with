@@ -19,8 +19,8 @@ const Profile = ({profile}) => (
           </span>
         </div>
         <div className='media-content'>
-          <p className='title'>{profile.name.givenName} {profile.name.familyName}</p>
-          <p className='subtitle is-5'>{profile.displayName}</p>
+          <p className='title'>{profile.name}</p>
+          <p className='subtitle is-5'>{profile.username}</p>
         </div>
       </div>
       <div className='content'>

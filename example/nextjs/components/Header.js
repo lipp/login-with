@@ -21,7 +21,7 @@ export default ({profile = false, origin}) => {
               </div>
               <div className='nav-item'>
                 <Link href='/token'>
-                  <a><strong> {profile.displayName}</strong></a>
+                  <a><strong> {profile.username}</strong></a>
                 </Link>
               </div>
               {profile.photo && 

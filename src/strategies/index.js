@@ -11,7 +11,7 @@ module.exports = (env, rootUrl) => Object.keys(strategies)
   .map(type => {
     const strategy = strategies[type]
     const callbackURL = `${rootUrl}/${type}/callback`
-    strategy.config = strategy.getConfig(process.env, callbackURL)
+    strategy.config = strategy.getConfig(env, callbackURL)
     strategy.type = type
     return strategy
   })

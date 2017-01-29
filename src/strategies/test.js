@@ -27,6 +27,12 @@ class TestStrategy extends Strategy {
 
 module.exports = {
   Ctor: TestStrategy,
-  getConfig: (env, callbackURL) => ({callbackURL}),
+  getConfig: (env, callbackURL) => {
+    if (env.TEST_STRATEGY) {
+      return {
+        callbackURL
+      }
+    }
+  },
   toUser: (profile, done) => done(null, {profile})
 }

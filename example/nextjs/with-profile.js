@@ -11,11 +11,8 @@ export default ({Component, autoRedirect = false}) => (
       if (process.env.DEBUG || (!req && window.location.origin === 'http://localhost:3000')) {
         console.log('debug profile')
         profile = JSON.stringify({
-          displayName: 'lipplocal',
-          name: {
-            givenName: 'Gerhard',
-            familyName: 'Lipp'
-          },
+          username: 'lipplocal',
+          name: 'Gerhard Preuss',
           photo: 'https://avatars.githubusercontent.com/u/445883?v=3',
           provider: 'github'
         })

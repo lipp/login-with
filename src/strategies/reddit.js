@@ -16,7 +16,7 @@ module.exports = {
       accessToken,
       refreshToken,
       profile: {
-        displayName: profile.name,
+        username: profile.name,
         provider: 'reddit',
         photos: []
       }

@@ -42,11 +42,8 @@ describe('the strategies module', () => {
         assert.equal(user.accessToken, 123)
         assert.equal(user.refreshToken, 345)
         assert.deepEqual(user.profile, {
-          displayName: 'pop',
-          name: {
-            givenName: 'Foo',
-            familyName: 'Bar'
-          },
+          username: 'pop',
+          name: 'Foo Bar',
           photo: 'asd',
           provider: 'github'
         })
@@ -91,11 +88,8 @@ describe('the strategies module', () => {
         assert.equal(user.token, 123)
         assert.equal(user.tokenSecret, 345)
         assert.deepEqual(user.profile, {
-          displayName: 'pop',
-          name: {
-            givenName: 'Foo',
-            familyName: 'Bar'
-          },
+          username: 'pop',
+          name: 'Foo Bar',
           photo: 'asd',
           provider: 'twitter'
         })
