@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-
 export default (Component) => (
   class WithLayout extends React.Component {
     state = {
@@ -13,7 +12,7 @@ export default (Component) => (
     static async getInitialProps (args) {
       return Component.getInitialProps ? await Component.getInitialProps({...args}) : {}
     }
-  
+
     componentDidMount () {
       this.setState({
         origin: window.location.origin

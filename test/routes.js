@@ -1,4 +1,4 @@
-/* globals describe it beforeEach afterEach */
+/* globals describe it beforeEach  */
 const routes = require('../src/routes')
 const assert = require('assert')
 const jwt = require('jsonwebtoken')
@@ -19,7 +19,6 @@ describe('the routes module', () => {
       }
       res = 'res'
       next = 'next'
-      passport = {}
     })
 
     it('calls passport.authenticate without preHook', done => {
@@ -117,7 +116,7 @@ describe('the routes module', () => {
       }
     }
     routes.onLogout({
-      tokenCookieName: 'token', 
+      tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar'
     })(req, res)
@@ -138,7 +137,7 @@ describe('the routes module', () => {
       }
     }
     routes.onLogout({
-      tokenCookieName: 'token', 
+      tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar'
     })(req, res)
@@ -191,7 +190,7 @@ describe('the routes module', () => {
           next(null, user)
         }
       },
-      tokenCookieName: 'token', 
+      tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar',
       tokenSecret: secret,
@@ -208,6 +207,8 @@ describe('the routes module', () => {
     }
     const error = 'foo'
     const secret = 'asdlkjasdlkjasd'
+    let tokenDeleted
+    let profileDeleted
     const res = {
       cookie: (name, content, opts) => {
         assert(opts.secure)
@@ -237,7 +238,7 @@ describe('the routes module', () => {
           next(error)
         }
       },
-      tokenCookieName: 'token', 
+      tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar',
       tokenSecret: secret,
@@ -268,7 +269,7 @@ describe('the routes module', () => {
           next(error, user)
         }
       },
-      tokenCookieName: 'token', 
+      tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar',
       tokenSecret: secret,

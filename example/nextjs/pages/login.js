@@ -24,14 +24,14 @@ const Login = ({profile, origin}) => {
   return (
     <div className='section'>
       { !profile && ['Twitter', 'GitHub', 'Reddit'].map(service => (
-          <LoginWith service={service} redirect={redirect} /> 
+        <LoginWith service={service} redirect={redirect} />
         ))
       }
       { profile && <LoggedInNotification profile={profile} redirect={redirect} /> }
       <p className='has-text-centered'>
-        The login profile will <strong>not</strong> be stored in any database. 
-        All non-sensitive profile information will be set as cookie and the 
-        service related tokens/keys are stored as <strong>encrypted</strong> 
+        The login profile will <strong>not</strong> be stored in any database.
+        All non-sensitive profile information will be set as cookie and the
+        service related tokens/keys are stored as <strong>encrypted</strong>
         <a href='https://jwt.io'> JWT</a>.
       </p>
       <p className='has-text-centered'>

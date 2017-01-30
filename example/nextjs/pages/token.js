@@ -2,7 +2,6 @@ import React from 'react'
 import withProfile from '../with-profile'
 import withLayout from '../with-layout'
 import KeyValueTable from '../components/KeyValueTable'
-import Profile from '../components/Profile'
 import flatten from 'flat'
 import fetchWithCookies from '../fetch-with-cookies'
 
@@ -34,11 +33,11 @@ class Token extends React.Component {
   }
 
   render () {
-    const {result, error, profile} = this.props
+    const {result, error} = this.props
     const flat = result ? flatten(result.decrypted) : []
     return (
-          <div className='token'>
-            {result
+      <div className='token'>
+        {result
               ? <div>
                 <div className='section'>
                   <h2 className='title is-2'>JWT</h2>
@@ -54,7 +53,7 @@ class Token extends React.Component {
               </div>
               : <span>something went wrong: {error}</span>
             }
-            <style jsx>{`
+        <style jsx>{`
               .breakable {
                 word-break: break-all;
               }
@@ -62,7 +61,7 @@ class Token extends React.Component {
                 margin-top: 2em;
               }
             `}</style>
-          </div>
+      </div>
     )
   }
 }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Stateless microservice for authentication with OAuth etc.",
   "scripts": {
-    "test": "mocha test",
+    "test": "standard && mocha test",
     "start": "node server.js"
   },
   "repository": {
@@ -40,7 +40,12 @@
     "session-memory-store": "^0.2.2"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "standard": "^8.6.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

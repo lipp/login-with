@@ -1,4 +1,4 @@
-/* globals describe it  beforeEach */
+/* globals describe it  before */
 const load = require('../src/strategies')
 const github = require('../src/strategies/github')
 const twitter = require('../src/strategies/twitter')
