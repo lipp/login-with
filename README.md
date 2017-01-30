@@ -28,7 +28,7 @@ that your other websites/webservices must run over `https`.
 
 # Setup
 
-The configuration is done solely through environment variables.
+The configuration is done by means of environment variables.
 
 ## Required environment variables
 
