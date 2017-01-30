@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Stateless microservice for authentication with OAuth etc.",
   "scripts": {
-    "test": "standard && mocha test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "standard && cross-env NODE_ENV=test nyc mocha ./test/*.js",
     "start": "node server.js"
   },
   "repository": {
@@ -41,7 +42,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
+    "coveralls": "^2.11.15",
+    "cross-env": "^3.1.4",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "sinon": "^1.17.7",
     "standard": "^8.6.0"
   },
