@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/lipp/login-with.svg?branch=master)](https://travis-ci.org/lipp/login-with)
+[![Coverage Status](https://coveralls.io/repos/github/lipp/login-with/badge.svg?branch=master)](https://coveralls.io/github/lipp/login-with?branch=master)
+
 # About 
 
 Stateless authentication microservice for "login-with" functionality, supporting:
