@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/lipp/login-with.svg?branch=master)](https://travis-ci.org/lipp/login-with)
+[![Coverage Status](https://coveralls.io/repos/github/lipp/login-with/badge.svg?branch=master)](https://coveralls.io/github/lipp/login-with?branch=master)
+
 # About 
 
 Stateless authentication microservice for "login-with" functionality, supporting:
@@ -28,7 +31,7 @@ that your other websites/webservices must run over `https`.
 
 # Setup
 
-The configuration is done solely through environment variables.
+The configuration is done by means of environment variables.
 
 ## Required environment variables
 
