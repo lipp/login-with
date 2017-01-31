@@ -9,7 +9,7 @@ const Index = ({profile, origin}) => (
     <div className='container has-text-centered'>
       <h1 className='title is-2'>Login-With<br />🔑</h1>
       <h2 className='subtitle is-4'>
-        Stateless authentication microservice for login with
+        Stateless authentication microservice for
         <ul>
           <li>Twitter</li>
           <li>GitHub</li>
@@ -42,8 +42,10 @@ const Index = ({profile, origin}) => (
         line-height: 0.5em;
       }
       .notification {
-        font-family: monospace;
         font-size: 1.1em;
+      }
+      .subtitle {
+        padding-top: 1em;
       }
     `}</style>
   </div>

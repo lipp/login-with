@@ -21,7 +21,7 @@ export default (Component) => (
 
     render () {
       const {origin} = this.state
-      const {profile} = this.props
+      const {profile, url} = this.props
       return (
         <div className='layout'>
           <Head>
@@ -29,13 +29,14 @@ export default (Component) => (
             <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css' />
             <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' />
           </Head>
-          <Header profile={profile} origin={origin} />
+          <Header profile={profile} origin={origin} url={url} />
           <div className='container'>
             <Component {...this.props} origin={origin} />
           </div>
           <Footer />
           <style jsx>{`
             .layout > .container {
+              max-width: 660px;
               min-height: 80vh;
             }
           `}</style>
