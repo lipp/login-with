@@ -1,0 +1,18 @@
+{
+  "name": "login-with",
+  "aliases": [
+    "login.now.sh"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "LW_SUBDOMAIN": "login.now.sh",
+    "LW_SESSION_SECRET": "@lw-session-secret",
+    "LW_JWT_SECRET": "@lw-token-secret",
+    "LW_REDDIT_CLIENTID": "@lw-reddit-clientid",
+    "LW_REDDIT_CLIENTSECRET": "@lw-reddit-clientsecret",
+    "LW_GITHUB_CLIENTID": "@lw-github-clientid",
+    "LW_GITHUB_CLIENTSECRET": "@lw-github-clientsecret",
+    "LW_TWITTER_CONSUMERKEY": "@lw-twitter-consumerkey",
+    "LW_TWITTER_CONSUMERSECRET": "@lw-twitter-consumersecret"
+  }
+}
