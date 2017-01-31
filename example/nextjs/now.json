@@ -1,0 +1,9 @@
+{
+  "name": "login-with-nextjs",
+  "aliases": [
+    "login-with.now.sh"
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

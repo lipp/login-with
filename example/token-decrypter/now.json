@@ -1,0 +1,10 @@
+{
+  "name": "token-decryptor",
+  "aliases": [
+    "token-decryptor.now.sh"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "LW_JWT_SECRET": "@lw-token-secret"
+  }
+}
