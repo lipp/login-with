@@ -13,7 +13,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 
 ```html
-<a href='https://login.yourdomain.com/twitter?successRedirect=ON_SUCCESS_URL&failureRedirect=ON_FAILURE_URL>
+<a href='https://login.yourdomain.com/twitter?success=ON_SUCCESS_URL&failure=ON_FAILURE_URL>
   Login with Twitter
 </a>
 ```
