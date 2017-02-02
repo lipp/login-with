@@ -1,5 +1,3 @@
-
-require('now-logs')('foofoo')
 const express = require('express')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')

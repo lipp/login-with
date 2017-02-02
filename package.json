@@ -33,7 +33,6 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "jsonwebtoken": "^7.2.1",
-    "now-logs": "0.0.7",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
     "passport-reddit": "^0.2.4",
