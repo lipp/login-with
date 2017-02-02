@@ -8,6 +8,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Twitter
 - GitHub
 - Reddit
+- Facebook
 - ... more to come (PRs welcome)
 
 This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
@@ -53,6 +54,14 @@ must be: `https://login.yourdomain.com/github/callback`
 
 - `LW_GITHUB_CLIENTID` - Your GitHub Client ID
 - `LW_GITHUB_CLIENTSECRET` - Your GitHub Client Secret
+
+## Facebook specific environment variables
+
+You need to create your own Facebook login application. If `LW_SUBDOMAIN=login.yourdomain.com` your allowed redirects
+must be: `https://login.yourdomain.com/facebook/callback`
+
+- `LW_FACEBOOK_APPID` - Your Facebook App ID
+- `LW_FACEBOOK_APPSECRET` - Your Facebook App Secret
 
 ## Reddit specific environment variables
 
