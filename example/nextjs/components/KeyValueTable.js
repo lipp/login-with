@@ -15,7 +15,7 @@ const KeyValueTable = ({flatObject}) => (
       ))}
     </tbody>
     <style jsx>{`
-      .table {
+      table td + td {
         word-break: break-all;
       }
     `}</style>

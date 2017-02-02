@@ -23,7 +23,7 @@ describe('the routes module', () => {
 
     it('calls passport.authenticate without preHook', done => {
       req.path = '/foo'
-      routes.onAuthenticationRequest({
+      routes({
         strategies: [{type: 'foo'}],
         passport: {
           authenticate: (type, opts) => (_req, _res, _next) => {
@@ -37,12 +37,12 @@ describe('the routes module', () => {
             done()
           }
         }
-      })(req, res, next)
+      }).onAuthenticationRequest(req, res, next)
     })
 
     it('calls passport.authenticate with preHook', done => {
       req.path = '/foo'
-      routes.onAuthenticationRequest({
+      routes({
         strategies: [{
           type: 'foo',
           preHook: (req, opts) => {
@@ -63,7 +63,7 @@ describe('the routes module', () => {
             done()
           }
         }
-      })(req, res, next)
+      }).onAuthenticationRequest(req, res, next)
     })
   })
 
@@ -83,7 +83,7 @@ describe('the routes module', () => {
         }
       }
     }
-    routes.onIndex({tokenCookieName: 'token', profileCookieName: 'profile'})(req, res)
+    routes({tokenCookieName: 'token', profileCookieName: 'profile'}).onIndex(req, res)
   })
 
   it('onLogout clears cookies', done => {
@@ -115,11 +115,11 @@ describe('the routes module', () => {
         done()
       }
     }
-    routes.onLogout({
+    routes({
       tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar'
-    })(req, res)
+    }).onLogout(req, res)
   })
 
   it('onLogout calls res.json({status}) if no req.query.success', done => {
@@ -136,11 +136,11 @@ describe('the routes module', () => {
         done()
       }
     }
-    routes.onLogout({
+    routes({
       tokenCookieName: 'token',
       profileCookieName: 'profile',
       cookieDomain: '.foo.bar'
-    })(req, res)
+    }).onLogout(req, res)
   })
 
   it('onAuthenticationCallback sets cookies on success', done => {
@@ -183,7 +183,7 @@ describe('the routes module', () => {
         done()
       }
     }
-    routes.onAuthenticationCallback({
+    routes({
       passport: {
         authenticate: (type, next) => (_req, _res) => {
           assert.equal(type, 'foo')
@@ -195,7 +195,7 @@ describe('the routes module', () => {
       cookieDomain: '.foo.bar',
       tokenSecret: secret,
       maxAge: 1000
-    })(req, res)
+    }).onAuthenticationCallback(req, res)
   })
 
   it('onAuthenticationCallback clear cookies on error', done => {
@@ -231,7 +231,7 @@ describe('the routes module', () => {
         done()
       }
     }
-    routes.onAuthenticationCallback({
+    routes({
       passport: {
         authenticate: (type, next) => (_req, _res) => {
           assert.equal(type, 'foo')
@@ -243,7 +243,7 @@ describe('the routes module', () => {
       cookieDomain: '.foo.bar',
       tokenSecret: secret,
       maxAge: 1000
-    })(req, res)
+    }).onAuthenticationCallback(req, res)
   })
 
   it('onAuthenticationCallback call res.json if redirect specified', done => {
@@ -262,7 +262,7 @@ describe('the routes module', () => {
         done()
       }
     }
-    routes.onAuthenticationCallback({
+    routes({
       passport: {
         authenticate: (type, next) => (_req, _res) => {
           assert.equal(type, 'foo')
@@ -274,6 +274,6 @@ describe('the routes module', () => {
       cookieDomain: '.foo.bar',
       tokenSecret: secret,
       maxAge: 1000
-    })(req, res)
+    }).onAuthenticationCallback(req, res)
   })
 })

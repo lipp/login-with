@@ -9,7 +9,7 @@ class TestStrategy extends Strategy {
   }
   authenticate (req, options) {
     if (req.session._test_once) {
-      const profile = {displayName: 'foo', id: 2138716238765, provider: 'test'}
+      const profile = {username: 'foo', provider: 'test'}
       this._verify(profile, (error, user) => {
         req.session._test_once = false
         if (error) {

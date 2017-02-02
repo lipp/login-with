@@ -22,9 +22,9 @@ On successfull login two cookies will be created:
 
 - `token` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
 - `profile` - A JSON string which containing non-sensitive information (accessible from browser JS):
-  - `displayName` - The account specific user alias (e.g. Twitter name)
-  - `photo` - Optional, the account specific user image link
-  - `name` - The "real" name containing `givenName` and `familyName`  
+  - `username` - string / mandatory, the account specific user alias (e.g. Twitter name)
+  - `photo` - string / pptional, the account specific user image link
+  - `name` - string / optional, the "real" name
 
 The cookies will be available for your toplevel domain and all subdomains. In addition, the cookie's `secure` flag is set, which means 
 that your other websites/webservices must run over `https`. 
@@ -33,7 +33,7 @@ that your other websites/webservices must run over `https`.
 
 The configuration is done by means of environment variables.
 
-## Required environment variables
+## Mandatory environment variables
 
 - `LW_SESSION_SECRET` - The session secret used by the microservice
 - `LW_JWT_SECRET` - The secret to sign the JSON Web Token (JWT)
@@ -86,7 +86,7 @@ Don't forget to `encodeURIComponent` on them.
 
 # Example
 
-Checkout [login-example.now.sh](https://login-example.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
+Visit [login-with.now.sh](https://login-with.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
 
 # Deployment with now
 

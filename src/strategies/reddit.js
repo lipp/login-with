@@ -17,8 +17,7 @@ module.exports = {
       refreshToken,
       profile: {
         username: profile.name,
-        provider: 'reddit',
-        photos: []
+        provider: 'reddit'
       }
     })
   },
