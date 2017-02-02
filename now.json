@@ -13,6 +13,8 @@
     "LW_GITHUB_CLIENTID": "@lw-github-clientid",
     "LW_GITHUB_CLIENTSECRET": "@lw-github-clientsecret",
     "LW_TWITTER_CONSUMERKEY": "@lw-twitter-consumerkey",
-    "LW_TWITTER_CONSUMERSECRET": "@lw-twitter-consumersecret"
+    "LW_TWITTER_CONSUMERSECRET": "@lw-twitter-consumersecret",
+    "LW_FACEBOOK_APPID": "@lw-facebook-appid",
+    "LW_FACEBOOK_APPSECRET": "@lw-facebook-appsecret"
   }
 }

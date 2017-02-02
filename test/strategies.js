@@ -4,10 +4,56 @@ const github = require('../src/strategies/github')
 const test = require('../src/strategies/test')
 const reddit = require('../src/strategies/reddit')
 const twitter = require('../src/strategies/twitter')
+const facebook = require('../src/strategies/facebook')
 const assert = require('assert')
 
 describe('the strategies module', () => {
   const rootUrl = 'https://foo.bar'
+
+  describe('facebook', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_FACEBOOK_APPID = 123
+      env.LW_FACEBOOK_APPSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'facebook')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/facebook/callback',
+        profileFields: ['displayName', 'name', 'photos']
+      })
+    })
+
+    it('toUser', done => {
+      const fbInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: 'baz'
+      }
+      facebook.toUser(123, 345, fbInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'baz',
+          photo: 'bar'
+        })
+        done()
+      })
+    })
+  })
 
   describe('github', () => {
     let strategies
