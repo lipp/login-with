@@ -19,7 +19,7 @@ export default ({profile = false, origin, url}) => (
           </div>
           <div className='nav-item'>
             <Link href='/profile'>
-              <a><strong> {profile.username}</strong></a>
+              <a><strong> {profile.username || profile.name}</strong></a>
             </Link>
           </div>
           {profile.photo &&
