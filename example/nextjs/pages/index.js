@@ -36,20 +36,32 @@ const Index = ({profile, origin}) => (
       { profile
           ? <LoggedInNotification profile={profile} redirect={encodeURIComponent(origin + '/')} />
           : <Link href='/login'>
-            <a className='button is-large is-primary'>Try it!</a>
+            <a className='button is-large is-primary'>
+              <span>Try it</span>
+              <span className='icon'><i className='fa fa-user' /></span>
+            </a>
           </Link>
       }
+      <br />
     </div>
     <style jsx>{`
       ul.columns {
         margin-top: 2em;
-        margin-bottom: 8vh;
+        margin-bottom: 7vh;
       }
       .notification {
         font-size: 1.1em;
       }
       .subtitle {
         padding-top: 1em;
+      }
+      .button.is-primary {
+        margin-bottom: 3em;
+        background-color: #da54c3;
+        text-transform: uppercase;
+      }
+      .button.is-primary:hover {
+        background-color: #c558b3;
       }
     `}</style>
   </div>
