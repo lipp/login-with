@@ -33,13 +33,16 @@ describe('the strategies module', () => {
       })
     })
 
-    it('toUser', done => {
+    it('toUser (with family and given name)', done => {
       const fbInfo = {
         displayName: 'pop',
         photos: [{
           value: 'bar'
         }],
-        name: 'baz'
+        name: {
+          familyName: 'doe',
+          givenName: 'john'
+        }
       }
       facebook.toUser(123, 345, fbInfo, (error, user) => {
         assert(!error)
@@ -47,7 +50,53 @@ describe('the strategies module', () => {
         assert.equal(user.refreshToken, 345)
         assert.deepEqual(user.profile, {
           username: 'pop',
-          name: 'baz',
+          name: 'john doe',
+          photo: 'bar'
+        })
+        done()
+      })
+    })
+
+    it('toUser (with given name)', done => {
+      const fbInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: {
+          givenName: 'john'
+        }
+      }
+      facebook.toUser(123, 345, fbInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'john',
+          photo: 'bar'
+        })
+        done()
+      })
+    })
+
+    it('toUser (with family name)', done => {
+      const fbInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: {
+          familyName: 'doe'
+        }
+      }
+      facebook.toUser(123, 345, fbInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'doe',
           photo: 'bar'
         })
         done()

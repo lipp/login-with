@@ -12,6 +12,7 @@ const Index = ({profile, origin}) => (
         Stateless authentication microservice for
         <ul>
           <li>Twitter</li>
+          <li>Facebook</li>
           <li>GitHub</li>
           <li>Reddit</li>
         </ul>
