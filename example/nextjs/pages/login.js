@@ -10,6 +10,9 @@ const LoginWith = ({service, redirect}) => (
       <span>Login with <strong>{service}</strong></span>
     </a>
     <style jsx>{`
+      .button {
+        border-width: 2px;
+      }
       .login {
         margin: 3em 0;
         display: flex;
