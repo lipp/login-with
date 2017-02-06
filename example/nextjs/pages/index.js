@@ -30,7 +30,7 @@ const Index = ({profile, origin}) => (
       <h2 className='subtitle is-4'>
         Stateless authentication microservice for
         <ul className='columns'>
-          {['Twitter', 'Facebook', 'GitHub', 'Reddit'].map(name => <Item name={name} key={name} />)}
+          {['Twitter', 'Facebook', 'Google', 'GitHub', 'Reddit'].map(name => <Item name={name} key={name} />)}
         </ul>
       </h2>
       { profile
@@ -46,6 +46,8 @@ const Index = ({profile, origin}) => (
     </div>
     <style jsx>{`
       ul.columns {
+        display: flex;
+        flex-wrap: wrap;
         margin-top: 2em;
         margin-bottom: 7vh;
       }

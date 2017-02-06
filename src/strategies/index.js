@@ -1,5 +1,6 @@
 const strategies = {
   github: require('./github'),
+  google: require('./google'),
   facebook: require('./facebook'),
   reddit: require('./reddit'),
   twitter: require('./twitter'),
