@@ -24,6 +24,10 @@ export default ({Component, autoRedirect = false}) => (
       }
       try {
         profile = JSON.parse(profile)
+        if (typeof profile.name === 'object') {
+          profile.name = profile.name.givenName
+          profile.username = profile.name.displayName
+        }
         const props = Component.getInitialProps ? await Component.getInitialProps({...args, profile}) : {}
         return {
           ...props,

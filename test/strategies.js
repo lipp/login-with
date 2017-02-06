@@ -1,6 +1,7 @@
 /* globals describe it  before */
 const load = require('../src/strategies')
 const github = require('../src/strategies/github')
+const google = require('../src/strategies/google')
 const test = require('../src/strategies/test')
 const reddit = require('../src/strategies/reddit')
 const twitter = require('../src/strategies/twitter')
@@ -143,6 +144,56 @@ describe('the strategies module', () => {
           name: 'Foo Bar',
           photo: 'asd',
           provider: 'github'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('google', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_GOOGLE_CLIENTID = 123
+      env.LW_GOOGLE_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'google')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/google/callback'
+      })
+    })
+
+    it('preHook', () => {
+      const opts = {}
+      google.preHook(undefined, opts)
+      assert.deepEqual(opts.scope, ['profile'])
+    })
+
+    it('toUser', done => {
+      const googleInfo = {
+        displayName: 'Foo Bar',
+        photos: [{
+          value: 'asd'
+        }]
+      }
+      google.toUser(123, 345, googleInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'Foo Bar',
+          name: 'Foo Bar',
+          photo: 'asd',
+          provider: 'google'
         })
         done()
       })

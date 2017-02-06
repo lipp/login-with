@@ -55,6 +55,14 @@ must be: `https://login.yourdomain.com/github/callback`
 - `LW_GITHUB_CLIENTID` - Your GitHub Client ID
 - `LW_GITHUB_CLIENTSECRET` - Your GitHub Client Secret
 
+## Google specific environment variables
+
+You need to create your own Google OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/google/callback`
+
+- `LW_GOOGLE_CLIENTID` - Your Google Client ID
+- `LW_GOOGLE_CLIENTSECRET` - Your Google Client Secret
+
 ## Facebook specific environment variables
 
 You need to create your own Facebook login application. If `LW_SUBDOMAIN=login.yourdomain.com` your allowed redirects
@@ -83,7 +91,9 @@ must be: `https://login.yourdomain.com/twitter/callback`
 # Endpoints
 
 - `/twitter` - login with Twitter account (if configured through env variables)
+- `/facebook` - login with Facebook account (if configured through env variables)
 - `/github` - login with GitHub account (if configured through env variables)
+- `/google` - login with Google account (if configured through env variables)
 - `/reddit` - login with Reddit account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
