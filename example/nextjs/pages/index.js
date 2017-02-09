@@ -53,8 +53,8 @@ const Index = ({profile, origin}) => (
     </div>
     <div className='deploy has-text-centered'>
       <h1 className='title is2'>Deploy your own</h1>
-      <div className='notification now'>now lipp/login-with</div>
-      <div className='notification docker'>docker pull lipp/login-with</div>
+      <div className='notification now'><strong>now</strong> lipp/login-with</div>
+      <div className='notification docker'><strong>docker</strong> pull lipp/login-with</div>
     </div>
     <style jsx>{`
       ul {
@@ -74,6 +74,9 @@ const Index = ({profile, origin}) => (
       .deploy .notification {
         font-size: 1.3em;
         font-family: monospace;
+      }
+      .deploy strong {
+        color: white;
       }
       .now {
         background-color: #333;
