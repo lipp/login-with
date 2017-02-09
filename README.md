@@ -9,6 +9,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - GitHub
 - Reddit
 - Facebook
+- Google
 - ... more to come (PRs welcome)
 
 This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
