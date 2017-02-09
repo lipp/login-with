@@ -3,6 +3,7 @@
   "aliases": [
     "login.now.sh"
   ],
+  "type": "npm",
   "env": {
     "NODE_ENV": "production",
     "LW_SUBDOMAIN": "login.now.sh",

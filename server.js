@@ -7,7 +7,7 @@ const MemoryStore = require('session-memory-store')(expressSession)
 const opts = require('./src/opts')(process.argv, process.env)
 
 if (!opts.tokenSecret) {
-  console.error('no LW_TOKEN_SECRET env variable specified')
+  console.error('no LW_JWT_SECRET env variable specified')
   process.exit(1)
 }
 
