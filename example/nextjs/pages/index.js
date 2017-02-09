@@ -14,10 +14,17 @@ const Item = ({name}) => (
     </li>
     <style jsx>{`
       .tag {
+        width: 140px;
         border: 2px solid rgb(199, 199, 199);
+        border-radius: 6px;
       }
       .icon {
         margin-right: 0.5em;
+      }
+      .column {
+        flex-basis: initial;
+        flex-shrink: 0;
+        flex-grow: 0;
       }
     `}</style>
   </div>
@@ -29,7 +36,7 @@ const Index = ({profile, origin}) => (
       <h1 className='title is-2'>Login-With<br />🔑</h1>
       <h2 className='subtitle is-4'>
         Stateless authentication microservice for
-        <ul className='columns'>
+        <ul>
           {['Twitter', 'Facebook', 'Google', 'GitHub', 'Reddit'].map(name => <Item name={name} key={name} />)}
         </ul>
       </h2>
@@ -45,17 +52,20 @@ const Index = ({profile, origin}) => (
       <br />
     </div>
     <style jsx>{`
-      ul.columns {
+      ul {
         display: flex;
         flex-wrap: wrap;
         margin-top: 2em;
         margin-bottom: 7vh;
+        width: 100%;
+        justify-content: center;
       }
       .notification {
         font-size: 1.1em;
       }
       .subtitle {
         padding-top: 1em;
+        width: 100%;
       }
       .button.is-primary {
         margin-bottom: 3em;
