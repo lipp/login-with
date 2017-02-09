@@ -99,7 +99,7 @@ must be: `https://login.yourdomain.com/twitter/callback`
 ## Beam specific environment variables
 
 You need to create your own Beam OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
-must be: `https://login.yourdomain.com/twitter/callback`
+must be: `https://login.yourdomain.com/beam/callback`
 
 - `LW_BEAM_CLIENTID` - Your Beam Client ID
 - `LW_BEAM_CLIENT_SECRET` - Your Beam Client Secret
