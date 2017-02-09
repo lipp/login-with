@@ -1,7 +1,9 @@
 FROM node:7-alpine
-EXPOSE 3000
-ADD package.json ./
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
 RUN npm i --production
-ADD server.js /server.js
+COPY . /usr/src/app
+EXPOSE 3000
 ENV NODE_ENV production
-RUN node /server.js
+CMD ["npm", "start"]
