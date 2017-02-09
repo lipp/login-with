@@ -12,6 +12,13 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Google
 - ... more to come (PRs welcome)
 
+You can deploy with `now` or `Docker` (for mandatory and optional env variables see below).
+
+```sh
+$ now lipp/login-with
+$ docker run lipp/login-with
+```
+
 This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 
 ```html
@@ -113,10 +120,34 @@ Visit [login-with.now.sh](https://login-with.now.sh). The source code is [here](
 1. Create your secrets for the environment variables
 2. Deploy, e.g. with [now](https://zeit.co/now)
 ```sh
-now -e NODE_ENV=production -e LW_SUBDOMAIN=login.yourdomain.com -e LW_SESSION_SECRET=@lw-session-secret \
+now lipp/login-with \
+	-e NODE_ENV=production \
+	-e LW_SUBDOMAIN=login.yourdomain.com \
+	-e LW_SESSION_SECRET=@lw-session-secret \
 	-e LW_JWT_SECRET=@lw-token-secret \
-	-e LW_REDDIT_CLIENTID=@lw-reddit-clientid -e LW_REDDIT_CLIENTSECRET=@lw-reddit-clientsecret \
-	-e LW_GITHUB_CLIENTID=@lw-github-clientid -e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
-	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey -e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	-e LW_REDDIT_CLIENTID=@lw-reddit-clientid \
+	-e LW_REDDIT_CLIENTSECRET=@lw-reddit-clientsecret \
+	-e LW_GITHUB_CLIENTID=@lw-github-clientid \
+	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
+	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
+	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
 	--alias login.yourdomain.com
 ``` 
+
+# Deployment with Docker
+
+1. Create your secrets for the environment variables
+2. Deploy, e.g. with Docker
+```sh
+docker run lipp/login-with -p 80:3000 \
+	-e NODE_ENV=production \
+	-e LW_SUBDOMAIN=login.yourdomain.com \
+	-e LW_SESSION_SECRET=@lw-session-secret \
+	-e LW_JWT_SECRET=@lw-token-secret \
+	-e LW_REDDIT_CLIENTID=@lw-reddit-clientid \
+	-e LW_REDDIT_CLIENTSECRET=@lw-reddit-clientsecret \
+	-e LW_GITHUB_CLIENTID=@lw-github-clientid \
+	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
+	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
+	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+```
