@@ -51,6 +51,11 @@ const Index = ({profile, origin}) => (
       }
       <br />
     </div>
+    <div className='deploy has-text-centered'>
+      <h1 className='title is2'>Deploy your own</h1>
+      <div className='notification now'>now lipp/login-with</div>
+      <div className='notification docker'>docker pull lipp/login-with</div>
+    </div>
     <style jsx>{`
       ul {
         display: flex;
@@ -62,6 +67,21 @@ const Index = ({profile, origin}) => (
       }
       .notification {
         font-size: 1.1em;
+      }
+      .deploy {
+        margin: 4em 0;
+      }
+      .deploy .notification {
+        font-size: 1.3em;
+        font-family: monospace;
+      }
+      .now {
+        background-color: #333;
+        color: white;
+      }
+      .docker {
+        background: rgba(20,136,198,1);
+        color: white;
       }
       .subtitle {
         padding-top: 1em;
