@@ -4,6 +4,7 @@ const strategies = {
   facebook: require('./facebook'),
   reddit: require('./reddit'),
   twitter: require('./twitter'),
+  beam: require('./beam'),
   test: require('./test')
 }
 
