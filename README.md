@@ -30,7 +30,7 @@ This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 
 On successfull login two cookies will be created:
 
-- `token` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
+- `jwt` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
 - `profile` - A JSON string which containing non-sensitive information (accessible from browser JS):
   - `username` - string / mandatory, the account specific user alias (e.g. Twitter name)
   - `photo` - string / optional, the account specific user image link
