@@ -20,7 +20,7 @@ $ now lipp/login-with
 $ docker run lipp/login-with
 ```
 
-This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
+This microservice must run in a subdomain of yours, e.g. `login.yourdomain.com`.
 
 ```html
 <a href='https://login.yourdomain.com/twitter?success=ON_SUCCESS_URL&failure=ON_FAILURE_URL>
@@ -28,7 +28,7 @@ This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 </a>
 ```
 
-On successfull login two cookies will be created:
+On successful login two cookies will be created:
 
 - `jwt` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
 - `profile` - A JSON string which containing non-sensitive information (accessible from browser JS):
@@ -115,7 +115,7 @@ must be: `https://login.yourdomain.com/beam/callback`
 - `/beam` - login with Beam account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
-All endpoints expect the query parameteres:
+All endpoints expect the query parameters:
 - `success` A url to redirect to in case of successful login (use `encodeURIComponent` for proper escaping)
 - `failure` A url to redirect to in case of failed login (use `encodeURIComponent` for proper escaping)
 
