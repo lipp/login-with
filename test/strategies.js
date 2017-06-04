@@ -395,6 +395,7 @@ describe('the strategies module', () => {
       assert.deepEqual(strategies[0].config, {
         clientID: 123,
         clientSecret: 432,
+        scope: ['channel:details:self'],
         callbackURL: 'https://foo.bar/mixer/callback'
       })
     })
