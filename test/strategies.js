@@ -6,7 +6,7 @@ const test = require('../src/strategies/test')
 const reddit = require('../src/strategies/reddit')
 const twitter = require('../src/strategies/twitter')
 const facebook = require('../src/strategies/facebook')
-const beam = require('../src/strategies/beam')
+const mixer = require('../src/strategies/mixer')
 const assert = require('assert')
 
 describe('the strategies module', () => {
@@ -377,43 +377,43 @@ describe('the strategies module', () => {
     })
   })
 
-  describe('beam', () => {
+  describe('mixer', () => {
     let strategies
     before(() => {
       const env = {}
-      env.LW_BEAM_CLIENTID = 123
-      env.LW_BEAM_CLIENTSECRET = 432
+      env.LW_MIXER_CLIENTID = 123
+      env.LW_MIXER_CLIENTSECRET = 432
       strategies = load(env, rootUrl)
     })
 
     it('gets loaded', () => {
       assert.equal(strategies.length, 1)
-      assert.equal(strategies[0].type, 'beam')
+      assert.equal(strategies[0].type, 'mixer')
     })
 
     it('config is correct', () => {
       assert.deepEqual(strategies[0].config, {
         clientID: 123,
         clientSecret: 432,
-        callbackURL: 'https://foo.bar/beam/callback'
+        callbackURL: 'https://foo.bar/mixer/callback'
       })
     })
 
     it('toUser', done => {
-      const beamInfo = {
+      const mixerInfo = {
         username: 'pop',
         _raw: JSON.stringify({
           avatarUrl: 'asd'
         })
       }
-      beam.toUser(123, 345, beamInfo, (error, user) => {
+      mixer.toUser(123, 345, mixerInfo, (error, user) => {
         assert(!error)
         assert.equal(user.accessToken, 123)
         assert.equal(user.refreshToken, 345)
         assert.deepEqual(user.profile, {
           username: 'pop',
           photo: 'asd',
-          provider: 'beam'
+          provider: 'mixer'
         })
         done()
       })
