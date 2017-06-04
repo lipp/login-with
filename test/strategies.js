@@ -403,9 +403,9 @@ describe('the strategies module', () => {
     it('toUser', done => {
       const mixerInfo = {
         username: 'pop',
-        _raw: JSON.stringify({
+        _raw: {
           avatarUrl: 'asd'
-        })
+        }
       }
       mixer.toUser(123, 345, mixerInfo, (error, user) => {
         assert(!error)
