@@ -13,16 +13,12 @@ module.exports = {
     }
   },
   toUser: (accessToken, refreshToken, profile, done) => {
-    let avatar
-    try {
-      avatar = JSON.parse(profile._raw).avatarUrl
-    } catch (error) {}
     done(null, {
       accessToken,
       refreshToken,
       profile: {
         username: profile.username,
-        photo: avatar,
+        photo: profile._raw.avatarUrl,
         provider: 'mixer'
       }
     })
