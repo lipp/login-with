@@ -8,7 +8,7 @@ module.exports = {
         clientID,
         clientSecret,
         callbackURL,
-        scope: ['channel:details:self', 'user:details:self']
+        scope: ['channel:details:self']
       }
     }
   },
