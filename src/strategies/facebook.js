@@ -28,6 +28,7 @@ module.exports = {
       refreshToken,
       profile: {
         username: profile.displayName,
+        provider: 'facebook',
         name,
         photo: profile.photos && profile.photos[0] ? profile.photos[0].value : null
       }

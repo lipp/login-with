@@ -53,7 +53,8 @@ describe('the strategies module', () => {
         assert.deepEqual(user.profile, {
           username: 'pop',
           name: 'john doe',
-          photo: 'bar'
+          photo: 'bar',
+          provider: 'facebook'
         })
         done()
       })
@@ -76,7 +77,8 @@ describe('the strategies module', () => {
         assert.deepEqual(user.profile, {
           username: 'pop',
           name: 'john',
-          photo: 'bar'
+          photo: 'bar',
+          provider: 'facebook'
         })
         done()
       })
@@ -99,7 +101,8 @@ describe('the strategies module', () => {
         assert.deepEqual(user.profile, {
           username: 'pop',
           name: 'doe',
-          photo: 'bar'
+          photo: 'bar',
+          provider: 'facebook'
         })
         done()
       })
