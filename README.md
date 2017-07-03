@@ -127,6 +127,9 @@ Visit [login-with.now.sh](https://login-with.now.sh). The source code is [here](
 
 # Deployment with now
 
+Note: **You need a custom domain** to run this microservice with now. Chrome (and maybe other browsers) explicitly prevent
+usage of wildcard cookies on .now.sh, which are required for this microservice to work.
+
 1. Create your secrets for the environment variables
 2. Deploy, e.g. with [now](https://zeit.co/now)
 ```sh
