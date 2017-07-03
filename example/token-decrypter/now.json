@@ -1,7 +1,7 @@
 {
   "name": "token-decryptor",
   "aliases": [
-    "token-decryptor.now.sh"
+    "token-decryptor.login-with.com"
   ],
   "env": {
     "NODE_ENV": "production",

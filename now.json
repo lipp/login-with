@@ -1,12 +1,12 @@
 {
   "name": "login-with",
   "aliases": [
-    "login.now.sh"
+    "auth.login-with.com"
   ],
   "type": "npm",
   "env": {
     "NODE_ENV": "production",
-    "LW_SUBDOMAIN": "login.now.sh",
+    "LW_SUBDOMAIN": "auth.login-with.com",
     "LW_SESSION_SECRET": "@lw-session-secret",
     "LW_JWT_SECRET": "@lw-token-secret",
     "LW_REDDIT_CLIENTID": "@lw-reddit-clientid",

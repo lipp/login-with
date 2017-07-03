@@ -5,7 +5,7 @@ import LoggedInNotification from '../components/LoggedInNotification'
 
 const LoginWith = ({service, redirect}) => (
   <div className='login'>
-    <a className='button is-medium' href={`https://login.now.sh/${service.toLowerCase()}?success=${redirect}&failure=${redirect}`} >
+    <a className='button is-medium' href={`https://auth.login-with.com/${service.toLowerCase()}?success=${redirect}&failure=${redirect}`} >
       <span className='icon is-medium'><i className={`fa fa-${service.toLowerCase()}`} /></span>
       <span>Login with <strong>{service}</strong></span>
     </a>

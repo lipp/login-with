@@ -24,7 +24,7 @@ class Token extends React.Component {
           }
         }
       } else {
-        result = await fetchWithCookies('https://token-decryptor.now.sh', req)
+        result = await fetchWithCookies('https://token-decryptor.login-with.com', req)
       }
       return {result}
     } catch (error) {
