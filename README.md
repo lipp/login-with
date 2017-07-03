@@ -10,7 +10,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Reddit
 - Facebook
 - Google
-- Beam
+- Mixer
 - ... more to come (PRs welcome)
 
 You can deploy with `now` or `Docker` (for mandatory and optional env variables see below).
@@ -96,13 +96,13 @@ must be: `https://login.yourdomain.com/twitter/callback`
 - `LW_TWITTER_CONSUMERKEY` - Your Twitter Consumer Key
 - `LW_TWITTER_CONSUMERSECRET` - Your Twitter Consumer Secret
 
-## Beam specific environment variables
+## Mixer specific environment variables
 
-You need to create your own Beam OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
-must be: `https://login.yourdomain.com/beam/callback`
+You need to create your own Mixer OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/mixer/callback`
 
-- `LW_BEAM_CLIENTID` - Your Beam Client ID
-- `LW_BEAM_CLIENT_SECRET` - Your Beam Client Secret
+- `LW_MIXER_CLIENTID` - Your Mixer Client ID
+- `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
 
 
 # Endpoints
@@ -112,7 +112,7 @@ must be: `https://login.yourdomain.com/beam/callback`
 - `/github` - login with GitHub account (if configured through env variables)
 - `/google` - login with Google account (if configured through env variables)
 - `/reddit` - login with Reddit account (if configured through env variables)
-- `/beam` - login with Beam account (if configured through env variables)
+- `/mixer` - login with Mixer account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
