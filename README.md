@@ -23,7 +23,7 @@ $ docker run lipp/login-with
 This microservice must run in a subdomain of yours, e.g. `login.yourdomain.com`.
 
 ```html
-<a href='https://login.yourdomain.com/twitter?success=ON_SUCCESS_URL&failure=ON_FAILURE_URL>
+<a href='https://login.yourdomain.com/twitter?success=ON_SUCCESS_URL&failure=ON_FAILURE_URL'>
   Login with Twitter
 </a>
 ```
