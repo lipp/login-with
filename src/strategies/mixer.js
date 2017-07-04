@@ -1,28 +1,25 @@
 module.exports = {
-  Ctor: require('passport-beam').Strategy,
+  Ctor: require('passport-mixer').Strategy,
   getConfig: (env, callbackURL) => {
-    const clientID = env.LW_BEAM_CLIENTID
-    const clientSecret = env.LW_BEAM_CLIENTSECRET
+    const clientID = env.LW_MIXER_CLIENTID
+    const clientSecret = env.LW_MIXER_CLIENTSECRET
     if (clientID && clientSecret) {
       return {
         clientID,
         clientSecret,
-        callbackURL
+        callbackURL,
+        scope: ['channel:details:self']
       }
     }
   },
   toUser: (accessToken, refreshToken, profile, done) => {
-    let avatar
-    try {
-      avatar = JSON.parse(profile._raw).avatarUrl
-    } catch (error) {}
     done(null, {
       accessToken,
       refreshToken,
       profile: {
         username: profile.username,
-        photo: avatar,
-        provider: 'beam'
+        photo: profile._raw.avatarUrl,
+        provider: 'mixer'
       }
     })
   }

@@ -10,7 +10,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Reddit
 - Facebook
 - Google
-- Beam
+- Mixer
 - ... more to come (PRs welcome)
 
 You can deploy with `now` or `Docker` (for mandatory and optional env variables see below).
@@ -20,7 +20,7 @@ $ now lipp/login-with
 $ docker run lipp/login-with
 ```
 
-This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
+This microservice must run in a subdomain of yours, e.g. `login.yourdomain.com`.
 
 ```html
 <a href='https://login.yourdomain.com/twitter?success=ON_SUCCESS_URL&failure=ON_FAILURE_URL>
@@ -28,7 +28,7 @@ This microservice must run in a subdomain of yours, e.g. `login.yourdamain.com`.
 </a>
 ```
 
-On successfull login two cookies will be created:
+On successful login two cookies will be created:
 
 - `jwt` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
 - `profile` - A JSON string which containing non-sensitive information (accessible from browser JS):
@@ -96,13 +96,13 @@ must be: `https://login.yourdomain.com/twitter/callback`
 - `LW_TWITTER_CONSUMERKEY` - Your Twitter Consumer Key
 - `LW_TWITTER_CONSUMERSECRET` - Your Twitter Consumer Secret
 
-## Beam specific environment variables
+## Mixer specific environment variables
 
-You need to create your own Beam OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
-must be: `https://login.yourdomain.com/beam/callback`
+You need to create your own Mixer OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/mixer/callback`
 
-- `LW_BEAM_CLIENTID` - Your Beam Client ID
-- `LW_BEAM_CLIENT_SECRET` - Your Beam Client Secret
+- `LW_MIXER_CLIENTID` - Your Mixer Client ID
+- `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
 
 
 # Endpoints
@@ -112,10 +112,10 @@ must be: `https://login.yourdomain.com/beam/callback`
 - `/github` - login with GitHub account (if configured through env variables)
 - `/google` - login with Google account (if configured through env variables)
 - `/reddit` - login with Reddit account (if configured through env variables)
-- `/beam` - login with Beam account (if configured through env variables)
+- `/mixer` - login with Mixer account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
-All endpoints expect the query parameteres:
+All endpoints expect the query parameters:
 - `success` A url to redirect to in case of successful login (use `encodeURIComponent` for proper escaping)
 - `failure` A url to redirect to in case of failed login (use `encodeURIComponent` for proper escaping)
 
@@ -126,6 +126,9 @@ Don't forget to `encodeURIComponent` on them.
 Visit [login-with.now.sh](https://login-with.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
 
 # Deployment with now
+
+Note: **You need a custom domain** to run this microservice with now. Chrome (and maybe other browsers) explicitly prevent
+usage of wildcard cookies on .now.sh, which are required for this microservice to work.
 
 1. Create your secrets for the environment variables
 2. Deploy, e.g. with [now](https://zeit.co/now)
