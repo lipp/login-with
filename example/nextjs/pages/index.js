@@ -34,6 +34,8 @@ const Index = ({profile, origin}) => (
   <div className='section'>
     <div className='container has-text-centered'>
       <h1 className='title is-2'>Login-With<br />🔑</h1>
+      <script async defer src='https://buttons.github.io/buttons.js' />
+      <a className='github-button' href='https://github.com/lipp/login-with' data-icon='octicon-star' data-size='large' data-show-count='true' aria-label='Star lipp/login-with on GitHub'>Star</a>
       <h2 className='subtitle is-4'>
         Stateless authentication microservice for
         <ul>
@@ -97,6 +99,11 @@ const Index = ({profile, origin}) => (
       }
       .button.is-primary:hover {
         background-color: #c558b3;
+      }
+      .github-button {
+        color: white;
+        display: block;
+        margin: 20px;
       }
     `}</style>
   </div>
