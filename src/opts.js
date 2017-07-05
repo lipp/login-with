@@ -1,6 +1,6 @@
 module.exports = (argv, env) => {
   const tenDays = 1000 * 60 * 60 * 24 * 10
-  const port = parseInt(process.argv[2], 10) || 3000
+  const port = process.env.PORT || parseInt(process.argv[2], 10) || 3000
   const subDomain = process.env.LW_SUBDOMAIN || `localhost:${port}`
   return {
     profileCookieName: process.env.LW_PROFILE_COOKIENAME || 'profile',

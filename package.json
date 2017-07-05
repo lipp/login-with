@@ -7,6 +7,7 @@
     "test": "standard && cross-env NODE_ENV=test nyc mocha ./test/*.js",
     "start": "node server.js"
   },
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lipp/login-with.git"
