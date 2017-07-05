@@ -1,13 +1,11 @@
 const express = require('express')
-const passport = require('passport')
-const cookieParser = require('cookie-parser')
-const expressSession = require('express-session')
-const MemoryStore = require('session-memory-store')(expressSession)
 const LoginApp = require('./index');
 const opts = require('./src/opts')(process.argv, process.env)
 
 let app = express();
 
+// use the LoginApp at '/'
 app.use('/', LoginApp);
 
+// start the server
 app.listen(opts.port)
