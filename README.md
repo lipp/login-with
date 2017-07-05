@@ -13,7 +13,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Mixer
 - ... more to come (PRs welcome)
 
-You can deploy with `now` or `Docker` (for mandatory and optional env variables see below).
+You can deploy with [`now`](https://zeit.co/now) or [`Docker`](https://www.docker.com/) (for mandatory and optional env variables see below).
 
 ```sh
 $ now lipp/login-with
