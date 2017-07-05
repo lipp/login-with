@@ -5,7 +5,8 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "standard && cross-env NODE_ENV=test nyc mocha ./test/*.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "standard:fix": "standard --fix"
   },
   "main": "index.js",
   "repository": {

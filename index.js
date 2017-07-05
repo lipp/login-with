@@ -67,4 +67,4 @@ if (strategies.length > 0) {
   )
 }
 
-module.exports = app;
+module.exports = app
