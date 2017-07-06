@@ -1,6 +1,6 @@
 {
   "name": "login-with",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Stateless microservice for authentication with OAuth etc.",
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
