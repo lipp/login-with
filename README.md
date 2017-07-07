@@ -10,6 +10,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Reddit
 - Facebook
 - Google
+- LinkedIn
 - Mixer
 - ... more to come (PRs welcome)
 
@@ -80,6 +81,14 @@ must be: `https://login.yourdomain.com/facebook/callback`
 - `LW_FACEBOOK_APPID` - Your Facebook App ID
 - `LW_FACEBOOK_APPSECRET` - Your Facebook App Secret
 
+## LinkedIn specific environment variables
+
+You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/linkedin/callback`
+
+- `LW_LINKEDIN_CLIENTID` - Your Google Client ID
+- `LW_LINKEDIN_CLIENTSECRET` - Your Google Client Secret
+
 ## Reddit specific environment variables
 
 You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
@@ -113,6 +122,7 @@ must be: `https://login.yourdomain.com/mixer/callback`
 - `/google` - login with Google account (if configured through env variables)
 - `/reddit` - login with Reddit account (if configured through env variables)
 - `/mixer` - login with Mixer account (if configured through env variables)
+- `/linkedin` - login with LinkedIn account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
@@ -123,7 +133,7 @@ Don't forget to `encodeURIComponent` on them.
 
 # Example
 
-Visit [login-with.now.sh](https://login-with.now.sh). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
+Visit [login-with.com](https://login-with.com). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
 
 # Deployment with now
 
