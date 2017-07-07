@@ -22,7 +22,8 @@
     "reddit",
     "github",
     "google",
-    "passport"
+    "passport",
+    "eventbrite"
   ],
   "author": "Gerhard Preuss",
   "license": "MIT",
