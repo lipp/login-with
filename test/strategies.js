@@ -7,6 +7,7 @@ const reddit = require('../src/strategies/reddit')
 const twitter = require('../src/strategies/twitter')
 const facebook = require('../src/strategies/facebook')
 const mixer = require('../src/strategies/mixer')
+const linkedin = require('../src/strategies/linkedin')
 const assert = require('assert')
 
 describe('the strategies module', () => {
@@ -148,6 +149,103 @@ describe('the strategies module', () => {
           name: 'Foo Bar',
           photo: 'asd',
           provider: 'github'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('linkedin', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_LINKEDIN_CLIENTID = 123
+      env.LW_LINKEDIN_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'linkedin')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/linkedin/callback',
+        state: true
+      })
+    })
+
+    it('toUser (with family and given name)', done => {
+      const linkedinInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: {
+          familyName: 'doe',
+          givenName: 'john'
+        }
+      }
+      linkedin.toUser(123, 345, linkedinInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'john doe',
+          photo: 'bar',
+          provider: 'linkedin'
+        })
+        done()
+      })
+    })
+
+    it('toUser (with given name)', done => {
+      const linkedinInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: {
+          givenName: 'john'
+        }
+      }
+      linkedin.toUser(123, 345, linkedinInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'john',
+          photo: 'bar',
+          provider: 'linkedin'
+        })
+        done()
+      })
+    })
+
+    it('toUser (with family name)', done => {
+      const linkedinInfo = {
+        displayName: 'pop',
+        photos: [{
+          value: 'bar'
+        }],
+        name: {
+          familyName: 'doe'
+        }
+      }
+      linkedin.toUser(123, 345, linkedinInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'doe',
+          photo: 'bar',
+          provider: 'linkedin'
         })
         done()
       })
