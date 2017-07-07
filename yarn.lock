@@ -1865,6 +1865,13 @@ passport-google-oauth20@^1.0.0:
   dependencies:
     passport-oauth2 "1.x.x"
 
+passport-linkedin-oauth2@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/passport-linkedin-oauth2/-/passport-linkedin-oauth2-1.5.0.tgz#06640b36a6f68299fedb8a6a3acfef4dd04d23b9"
+  dependencies:
+    passport-oauth2 "1.x.x"
+    underscore "^1.7.0"
+
 passport-mixer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/passport-mixer/-/passport-mixer-1.0.1.tgz#c5a4dc43577e634c2cd46d3ab3cc70608d2b63ba"
@@ -2532,6 +2539,10 @@ uid-safe@~2.1.3:
 uid2@0.0.x:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
+
+underscore@^1.7.0:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 uniq@^1.0.1:
   version "1.0.1"
