@@ -39,7 +39,7 @@ const Index = ({profile, origin}) => (
       <h2 className='subtitle is-4'>
         Stateless authentication microservice for
         <ul>
-          {['Twitter', 'Facebook', 'Google', 'GitHub', 'Reddit'].map(name => <Item name={name} key={name} />)}
+          {['Twitter', 'Facebook', 'Google', 'GitHub', 'Reddit', 'LinkedIn'].map(name => <Item name={name} key={name} />)}
         </ul>
       </h2>
       { profile
@@ -58,6 +58,12 @@ const Index = ({profile, origin}) => (
       <div className='notification now'><strong>now</strong> lipp/login-with</div>
       <div className='notification docker'><strong>docker</strong> pull lipp/login-with</div>
     </div>
+    <style jsx global>{`
+      .fa-linkedin {
+        position: relative;
+        top: -1px;
+      }
+    `}</style>
     <style jsx>{`
       ul {
         display: flex;
