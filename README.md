@@ -10,6 +10,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Reddit
 - Facebook
 - Google
+- LinkedIn
 - Mixer
 - ... more to come (PRs welcome)
 
@@ -79,6 +80,14 @@ must be: `https://login.yourdomain.com/facebook/callback`
 
 - `LW_FACEBOOK_APPID` - Your Facebook App ID
 - `LW_FACEBOOK_APPSECRET` - Your Facebook App Secret
+
+## LinkedIn specific environment variables
+
+You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/linkedin/callback`
+
+- `LW_LINKEDIN_CLIENTID` - Your Google Client ID
+- `LW_LINKEDIN_CLIENTSECRET` - Your Google Client Secret
 
 ## Reddit specific environment variables
 
