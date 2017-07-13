@@ -246,6 +246,54 @@ describe('the routes module', () => {
     }).onAuthenticationCallback(req, res)
   })
 
+  it('onAuthenticationCallback treats no user as an error', done => {
+    const req = {
+      path: '/foo',
+      session: {
+        failure: encodeURIComponent('http://foo.bar/fail')
+      }
+    }
+    const error = 'No user was returned'
+    const secret = 'asdlkjasdlkjasd'
+    let tokenDeleted
+    let profileDeleted
+    const res = {
+      cookie: (name, content, opts) => {
+        assert(opts.secure)
+        assert(opts.expires <= new Date())
+        assert.equal(opts.domain, '.foo.bar')
+        if (name === 'profile') {
+          assert.equal(content, JSON.stringify({error}))
+          assert(!opts.httpOnly)
+          profileDeleted = true
+        }
+        if (name === 'token') {
+          assert.equal(content, '')
+          assert(opts.httpOnly)
+          tokenDeleted = true
+        }
+      },
+      redirect: location => {
+        assert.equal(location, 'http://foo.bar/fail')
+        assert(profileDeleted && tokenDeleted)
+        done()
+      }
+    }
+    routes({
+      passport: {
+        authenticate: (type, next) => (_req, _res) => {
+          assert.equal(type, 'foo')
+          next(null, null)
+        }
+      },
+      tokenCookieName: 'token',
+      profileCookieName: 'profile',
+      cookieDomain: '.foo.bar',
+      tokenSecret: secret,
+      maxAge: 1000
+    }).onAuthenticationCallback(req, res)
+  })
+
   it('onAuthenticationCallback call res.json if redirect specified', done => {
     const req = {
       path: '/foo',
