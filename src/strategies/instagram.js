@@ -21,8 +21,7 @@ module.exports = {
         provider,
         photo: _json.data.profile_picture,
         name: displayName
-      },
-      meta: _json.data
+      }
     })
   }
 }
