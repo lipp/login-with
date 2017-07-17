@@ -132,7 +132,7 @@ must be: `https://login.yourdomain.com/instagram/callback`
 - `/reddit` - login with Reddit account (if configured through env variables)
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
-- `/instagram` - login with LinkedIn account (if configured through env variables)
+- `/instagram` - login with Instagram account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
