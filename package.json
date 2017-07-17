@@ -20,6 +20,7 @@
     "microservice",
     "twitter",
     "reddit",
+    "instagram",
     "github",
     "google",
     "passport"
@@ -39,6 +40,7 @@
     "passport-facebook": "^2.1.1",
     "passport-github2": "^0.1.10",
     "passport-google-oauth20": "^1.0.0",
+    "passport-instagram": "^1.0.0",
     "passport-linkedin-oauth2": "^1.5.0",
     "passport-mixer": "^1.0.1",
     "passport-reddit": "^0.2.4",
