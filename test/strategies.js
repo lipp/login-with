@@ -6,6 +6,7 @@ const test = require('../src/strategies/test')
 const reddit = require('../src/strategies/reddit')
 const twitter = require('../src/strategies/twitter')
 const facebook = require('../src/strategies/facebook')
+const instagram = require('../src/strategies/instagram')
 const mixer = require('../src/strategies/mixer')
 const linkedin = require('../src/strategies/linkedin')
 const assert = require('assert')
@@ -472,6 +473,50 @@ describe('the strategies module', () => {
           name: 'Foo Bar',
           photo: 'asd',
           provider: 'twitter'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('instagram', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_INSTAGRAM_CLIENTID = 123
+      env.LW_INSTAGRAM_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'instagram')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/instagram/callback'
+      })
+    })
+
+    it('toUser', done => {
+      const instagramInfo = {
+        provider: 'instagram',
+        displayName: 'Foo Bar',
+        username: 'pop',
+        _json: { data: { profile_picture: 'asd' } }
+      }
+      instagram.toUser(123, 345, instagramInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.token, 123)
+        assert.equal(user.tokenSecret, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'Foo Bar',
+          photo: 'asd',
+          provider: 'instagram'
         })
         done()
       })

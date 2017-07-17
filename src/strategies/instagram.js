@@ -20,9 +20,9 @@ module.exports = {
         username,
         provider,
         photo: _json.data.profile_picture,
-        name: displayName,
-        meta: _json.data
-      }
+        name: displayName
+      },
+      meta: _json.data
     })
   }
 }
