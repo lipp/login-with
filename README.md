@@ -114,10 +114,10 @@ must be: `https://login.yourdomain.com/mixer/callback`
 - `LW_MIXER_CLIENTID` - Your Mixer Client ID
 - `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
 
-## Mixer specific environment variables
+## Instagram specific environment variables
 
 You need to create your own Instagram OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
-must be: `https://login.yourdomain.com/mixer/callback`
+must be: `https://login.yourdomain.com/instagram/callback`
 
 - `LW_INSTAGRAM_CLIENTID` - Your Instagram Client ID
 - `LW_INSTAGRAM_CLIENTSECRET` - Your Instagram Client Secret
