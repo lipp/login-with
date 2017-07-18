@@ -31,13 +31,13 @@ module.exports = ({
     onAuthenticationCallback: (req, res, next) => {
       const type = req.path.split('/')[1]
       passport.authenticate(type, (error, user) => {
-        if (error) {
+        if (error || !user) {
           res.cookie(tokenCookieName, '', cookieOpts({
             reset: true,
             httpOnly: true,
             domain: cookieDomain
           }))
-          res.cookie(profileCookieName, JSON.stringify({error}), cookieOpts({
+          res.cookie(profileCookieName, JSON.stringify({error: error || 'No user was returned'}), cookieOpts({
             httpOnly: false,
             domain: cookieDomain,
             maxAge
