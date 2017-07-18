@@ -26,7 +26,7 @@ const Login = ({profile, origin}) => {
   const redirect = encodeURIComponent(origin + '/')
   return (
     <div className='section'>
-      { !profile && ['Twitter', 'Google', 'GitHub', 'Reddit', 'Facebook', 'LinkedIn'].map(service => (
+      { !profile && ['Twitter', 'Google', 'GitHub', 'Reddit', 'Facebook', 'LinkedIn', 'Instagram'].map(service => (
         <LoginWith key={service} service={service} redirect={redirect} />
         ))
       }
