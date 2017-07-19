@@ -5,11 +5,8 @@ const strategies = {
   reddit: require('./reddit'),
   twitter: require('./twitter'),
   mixer: require('./mixer'),
-<<<<<<< HEAD
   eventbrite: require('./eventbrite'),
-=======
   linkedin: require('./linkedin'),
->>>>>>> 74dcb919b526dfb7fb9e32adb9d10f5dedd77941
   test: require('./test')
 }
 

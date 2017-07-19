@@ -12,6 +12,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Google
 - LinkedIn
 - Mixer
+- Eventbrite
 - ... more to come (PRs welcome)
 
 You can deploy with [`now`](https://zeit.co/now) or [`Docker`](https://www.docker.com/) (for mandatory and optional env variables see below).
@@ -113,6 +114,14 @@ must be: `https://login.yourdomain.com/mixer/callback`
 - `LW_MIXER_CLIENTID` - Your Mixer Client ID
 - `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
 
+## Eventbrite specific environment variables
+
+You need to create your own Twitter OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/eventbrite/callback`
+
+- `LW_EVENTBRITE_CONSUMERKEY` - Your Eventbrite Consumer Key
+- `LW_EVENTBRITE_CONSUMERSECRET` - Your Eventbrite Consumer Secret
+
 
 # Endpoints
 
@@ -123,6 +132,7 @@ must be: `https://login.yourdomain.com/mixer/callback`
 - `/reddit` - login with Reddit account (if configured through env variables)
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
+- `/eventbrite` - login with Eventbrite account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
@@ -154,6 +164,8 @@ now lipp/login-with \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
 	--alias login.yourdomain.com
 ``` 
 
@@ -173,4 +185,6 @@ docker run lipp/login-with -p 80:3000 \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
 ```

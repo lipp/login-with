@@ -8,6 +8,7 @@ const twitter = require('../src/strategies/twitter')
 const facebook = require('../src/strategies/facebook')
 const mixer = require('../src/strategies/mixer')
 const linkedin = require('../src/strategies/linkedin')
+const eventbrite = require('../src/strategies/eventbrite')
 const assert = require('assert')
 
 describe('the strategies module', () => {
@@ -516,6 +517,51 @@ describe('the strategies module', () => {
           username: 'pop',
           photo: 'asd',
           provider: 'mixer'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('eventbrite', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_EVENTBRITE_CLIENTID = 123
+      env.LW_EVENTBRITE_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'eventbrite')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/eventbrite/callback'
+      })
+    })
+
+    it('toUser', done => {
+      const eventbriteInfo = {
+        username: 'yo',
+        displayName: 'pop',
+        emails: [{
+          'value': 'example@example.com'
+        }]
+      }
+      eventbrite.toUser(123, 345, eventbriteInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'yo',
+          name: 'pop',
+          provider: 'eventbrite',
+          email: 'example@example.com'
         })
         done()
       })

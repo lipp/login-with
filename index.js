@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const MemoryStore = require('session-memory-store')(expressSession)
 
+require('dotenv').config()
+
 const opts = require('./src/opts')(process.argv, process.env)
 
 if (!opts.tokenSecret) {
