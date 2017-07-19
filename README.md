@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/lipp/login-with.svg?branch=master)](https://travis-ci.org/lipp/login-with)
 [![Coverage Status](https://coveralls.io/repos/github/lipp/login-with/badge.svg?branch=master)](https://coveralls.io/github/lipp/login-with?branch=master)
 
-# About 
+# About
 
 Stateless authentication microservice for "login-with" functionality, supporting:
 
@@ -11,6 +11,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Facebook
 - Google
 - LinkedIn
+- Instagram
 - Mixer
 - Eventbrite
 - ... more to come (PRs welcome)
@@ -38,8 +39,8 @@ On successful login two cookies will be created:
   - `photo` - string / optional, the account specific user image link
   - `name` - string / optional, the "real" name
 
-The cookies will be available for your toplevel domain and all subdomains. In addition, the cookie's `secure` flag is set, which means 
-that your other websites/webservices must run over `https`. 
+The cookies will be available for your toplevel domain and all subdomains. In addition, the cookie's `secure` flag is set, which means
+that your other websites/webservices must run over `https`.
 
 # Setup
 
@@ -50,7 +51,7 @@ The configuration is done by means of environment variables.
 - `LW_SESSION_SECRET` - The session secret used by the microservice
 - `LW_JWT_SECRET` - The secret to sign the JSON Web Token (JWT)
 - `LW_SUBDOMAIN` - The subdomain this microservice runs, e.g. `login.yourdomain.com`.
-  All other subdomains (e.g. `api.yourdomain.com`) and the top-level (e.g. `yourdomain.com`) 
+  All other subdomains (e.g. `api.yourdomain.com`) and the top-level (e.g. `yourdomain.com`)
 
 ## Optional environment variables
 
@@ -60,7 +61,7 @@ The configuration is done by means of environment variables.
 
 ## GitHub specific environment variables
 
-You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/github/callback`
 
 - `LW_GITHUB_CLIENTID` - Your GitHub Client ID
@@ -68,7 +69,7 @@ must be: `https://login.yourdomain.com/github/callback`
 
 ## Google specific environment variables
 
-You need to create your own Google OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own Google OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/google/callback`
 
 - `LW_GOOGLE_CLIENTID` - Your Google Client ID
@@ -84,7 +85,7 @@ must be: `https://login.yourdomain.com/facebook/callback`
 
 ## LinkedIn specific environment variables
 
-You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/linkedin/callback`
 
 - `LW_LINKEDIN_CLIENTID` - Your LinkedIn Client ID
@@ -92,7 +93,7 @@ must be: `https://login.yourdomain.com/linkedin/callback`
 
 ## Reddit specific environment variables
 
-You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/reddit/callback`
 
 - `LW_REDDIT_CLIENTID` - Your Reddit Client ID
@@ -100,7 +101,7 @@ must be: `https://login.yourdomain.com/reddit/callback`
 
 ## Twitter specific environment variables
 
-You need to create your own Twitter OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own Twitter OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/twitter/callback`
 
 - `LW_TWITTER_CONSUMERKEY` - Your Twitter Consumer Key
@@ -108,11 +109,12 @@ must be: `https://login.yourdomain.com/twitter/callback`
 
 ## Mixer specific environment variables
 
-You need to create your own Mixer OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own Mixer OAuth Client. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/mixer/callback`
 
 - `LW_MIXER_CLIENTID` - Your Mixer Client ID
 - `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
+
 
 ## Eventbrite specific environment variables
 
@@ -121,6 +123,15 @@ must be: `https://login.yourdomain.com/eventbrite/callback`
 
 - `LW_EVENTBRITE_CONSUMERKEY` - Your Eventbrite Consumer Key
 - `LW_EVENTBRITE_CONSUMERSECRET` - Your Eventbrite Consumer Secret
+
+## Instagram specific environment variables
+
+You need to create your own Instagram OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
+must be: `https://login.yourdomain.com/instagram/callback`
+
+- `LW_INSTAGRAM_CLIENTID` - Your Instagram Client ID
+- `LW_INSTAGRAM_CLIENTSECRET` - Your Instagram Client Secret
+
 
 
 # Endpoints
@@ -133,6 +144,7 @@ must be: `https://login.yourdomain.com/eventbrite/callback`
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
 - `/eventbrite` - login with Eventbrite account (if configured through env variables)
+- `/instagram` - login with Instagram account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
@@ -166,8 +178,10 @@ now lipp/login-with \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
 	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
 	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
+	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
+	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 	--alias login.yourdomain.com
-``` 
+```
 
 # Deployment with Docker
 
@@ -187,4 +201,6 @@ docker run lipp/login-with -p 80:3000 \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
 	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
 	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
+	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
+	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 ```

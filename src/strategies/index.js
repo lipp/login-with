@@ -7,6 +7,7 @@ const strategies = {
   mixer: require('./mixer'),
   eventbrite: require('./eventbrite'),
   linkedin: require('./linkedin'),
+  instagram: require('./instagram'),
   test: require('./test')
 }
 
