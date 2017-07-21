@@ -35,7 +35,7 @@ On successful login two cookies will be created:
 - `jwt` - A "JSON Web Token" (JWT) containing profile information and the respective access tokens (Twitter/etc). http-only!
 - `profile` - A JSON string which containing non-sensitive information (accessible from browser JS):
   - `username` - string / mandatory, the account specific user alias (e.g. Twitter name)
-  - `photo` - string / optional, the account specific user image link
+  - `photo` - string / optional, the account specific user image link
   - `name` - string / optional, the "real" name
 
 The cookies will be available for your toplevel domain and all subdomains. In addition, the cookie's `secure` flag is set, which means
