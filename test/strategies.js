@@ -592,11 +592,8 @@ describe('the strategies module', () => {
 
     it('toUser', done => {
       const eventbriteInfo = {
-        username: 'yo',
-        displayName: 'pop',
-        emails: [{
-          'value': 'example@example.com'
-        }]
+        id: 'yo',
+        displayName: 'pop'
       }
       eventbrite.toUser(123, 345, eventbriteInfo, (error, user) => {
         assert(!error)
@@ -605,8 +602,7 @@ describe('the strategies module', () => {
         assert.deepEqual(user.profile, {
           username: 'yo',
           name: 'pop',
-          provider: 'eventbrite',
-          email: 'example@example.com'
+          provider: 'eventbrite'
         })
         done()
       })

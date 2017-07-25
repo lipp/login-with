@@ -13,15 +13,14 @@ module.exports = {
   },
 
   toUser: (accessToken, refreshToken, profile, done) => {
-    const {username, displayName, emails} = profile
+    const {id, displayName} = profile
     done(null, {
       accessToken,
       refreshToken,
       profile: {
-        username,
+        username: id,
         name: displayName,
-        provider: 'eventbrite',
-        email: emails[0].value
+        provider: 'eventbrite'
       }
     })
   }
