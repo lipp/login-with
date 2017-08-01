@@ -118,11 +118,11 @@ must be: `https://login.yourdomain.com/mixer/callback`
 
 ## Eventbrite specific environment variables
 
-You need to create your own Twitter OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+You need to create your own Eventbrite OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
 must be: `https://login.yourdomain.com/eventbrite/callback`
 
-- `LW_EVENTBRITE_CONSUMERKEY` - Your Eventbrite Consumer Key
-- `LW_EVENTBRITE_CONSUMERSECRET` - Your Eventbrite Consumer Secret
+- `LW_EVENTBRITE_CLIENTID` - Your Eventbrite Consumer Key
+- `LW_EVENTBRITE_CLIENTSECRET` - Your Eventbrite Consumer Secret
 
 ## Instagram specific environment variables
 
@@ -176,8 +176,8 @@ now lipp/login-with \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
-	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
-	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
+	-e LW_EVENTBRITE_CLIENTID=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CLIENTSECRET=@lw-eventbrite-consumersecret \
 	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
 	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 	--alias login.yourdomain.com
@@ -199,8 +199,8 @@ docker run lipp/login-with -p 80:3000 \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
-	-e LW_EVENTBRITE_CONSUMERKEY=@lw-eventbrite-consumerkey \
-	-e LW_EVENTBRITE_CONSUMERSECRET=@lw-eventbrite-consumersecret \
+	-e LW_EVENTBRITE_CLIENTID=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CLIENTSECRET=@lw-eventbrite-consumersecret \
 	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
 	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 ```
