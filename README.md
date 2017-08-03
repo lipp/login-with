@@ -141,6 +141,17 @@ All endpoints expect the query parameters:
 
 Don't forget to `encodeURIComponent` on them.
 
+# Testing
+
+Say you deployed your `login-with` container with:
+- correct environment variables
+- properly configured services (e.g. Twitter callback) 
+- served via https on `auth.your-domain.com`
+
+Then you can test everything by just "visiting" your login strategy with the browser, e.g. `https://auth.your-domain.com/twitter`.
+In case of success, you will be finally redirected and see the contents of your profile as JSON.
+In case of error, the error will be shown as JSON. 
+
 # Example
 
 Visit [login-with.com](https://login-with.com). The source code is [here](https://github.com/lipp/login-with/tree/master/example/nextjs).
