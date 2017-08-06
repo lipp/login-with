@@ -8,7 +8,7 @@ module.exports = {
         clientID,
         clientSecret,
         callbackURL,
-        scope: ['channel:details:self']
+        scope: env.LW_MIXER_SCOPE || 'channel:details:self'
       }
     }
   },

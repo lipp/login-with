@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const scopeHandler = require('./scopeHandler')
 
 const cookieOpts = ({httpOnly, reset = false, domain, maxAge = false}) => ({
   secure: true,
@@ -15,14 +16,21 @@ module.exports = ({
     tokenSecret,
     profileCookieName,
     cookieDomain,
+    env,
     maxAge = false
   }) => ({
     onAuthenticationRequest: (req, res, next) => {
       const type = req.path.split('/')[1]
       const strategy = strategies.find(strategy => strategy.type === type)
       const opts = {}
+      if (env && env.LW_DYNAMIC_SCOPE && req.query && req.query.scope) {
+        opts.scope = scopeHandler.decode(req.query.scope)
+      }
       req.session.success = req.query.success
       req.session.failure = req.query.failure
+      if (req.query && req.query.scope) {
+        opts.scope = req.query.scope.split(' ')
+      }
       if (strategy.preHook) {
         strategy.preHook(req, opts)
       }

@@ -525,10 +525,10 @@ describe('the strategies module', () => {
 
   describe('mixer', () => {
     let strategies
+    const env = {}
+    env.LW_MIXER_CLIENTID = 123
+    env.LW_MIXER_CLIENTSECRET = 432
     before(() => {
-      const env = {}
-      env.LW_MIXER_CLIENTID = 123
-      env.LW_MIXER_CLIENTSECRET = 432
       strategies = load(env, rootUrl)
     })
 
@@ -544,6 +544,24 @@ describe('the strategies module', () => {
         scope: ['channel:details:self'],
         callbackURL: 'https://foo.bar/mixer/callback'
       })
+    })
+    describe('reads scopes from env', () => {
+      const scopeEnv = Object.assign(
+        {},
+        env,
+        {
+          LW_MIXER_SCOPE: 'channel:details:self interactive:manage:self'
+        }
+      )
+      const scopeStrategy = load(scopeEnv, rootUrl)
+      assert.deepEqual(
+        scopeStrategy[0].config,
+        {
+          clientID: 123,
+          clientSecret: 432,
+          scope: ['channel:details:self', 'interactive:manage:self'],
+          callbackURL: 'https://foo.bar/mixer/callback'
+        })
     })
 
     it('toUser', done => {

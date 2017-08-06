@@ -44,6 +44,7 @@ app.use(passport.initialize())
 if (strategies.length > 0) {
   opts.strategies = strategies
   opts.passport = passport
+  opts.env = process.env
   const routes = require('./src/routes')(opts)
 
   app.get(

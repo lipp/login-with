@@ -57,6 +57,7 @@ The configuration is done by means of environment variables.
 - `LW_COOKIE_MAXAGE` - The max age of the store cookie, defaults to 10 days
 - `LW_PROFILE_COOKIENAME` - The profile's cookie name, defaults to `profile`
 - `LW_JWT_COOKIENAME` - The JSON Web Token's (JWT) cookie name, defaults to `jwt`
+- `LW_DYNAMIC_SCOPE` - When set allows you to customize the scopes used in an authentication request, defaults to off
 
 ## GitHub specific environment variables
 
@@ -113,6 +114,7 @@ must be: `https://login.yourdomain.com/mixer/callback`
 
 - `LW_MIXER_CLIENTID` - Your Mixer Client ID
 - `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
+- `LW_MIXER_SCOPE` - Specify which scopes the authorization request with Mixer should have. Check [Mixer's documentation](https://dev.mixer.com/reference/oauth/index.html#oauth_scopes) for scopes.
 
 ## Instagram specific environment variables
 
@@ -145,12 +147,12 @@ Don't forget to `encodeURIComponent` on them.
 
 Say you deployed your `login-with` container with:
 - correct environment variables
-- properly configured services (e.g. Twitter callback) 
+- properly configured services (e.g. Twitter callback)
 - served via https on `auth.your-domain.com`
 
 Then you can test everything by just "visiting" your login strategy with the browser, e.g. `https://auth.your-domain.com/twitter`.
 In case of success, you will be finally redirected and see the contents of your profile as JSON.
-In case of error, the error will be shown as JSON. 
+In case of error, the error will be shown as JSON.
 
 # Example
 
