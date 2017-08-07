@@ -23,7 +23,8 @@
     "instagram",
     "github",
     "google",
-    "passport"
+    "passport",
+    "eventbrite"
   ],
   "author": "Gerhard Preuss",
   "license": "MIT",
@@ -46,6 +47,7 @@
     "passport-reddit": "^0.2.4",
     "passport-strategy": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "passport-eventbrite-oauth": "0.0.3",
     "session-memory-store": "^0.2.2"
   },
   "devDependencies": {

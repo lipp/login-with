@@ -13,6 +13,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - LinkedIn
 - Instagram
 - Mixer
+- Eventbrite
 - ... more to come (PRs welcome)
 
 You can deploy with [`now`](https://zeit.co/now) or [`Docker`](https://www.docker.com/) (for mandatory and optional env variables see below).
@@ -88,8 +89,8 @@ must be: `https://login.yourdomain.com/facebook/callback`
 You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/linkedin/callback`
 
-- `LW_LINKEDIN_CLIENTID` - Your Google Client ID
-- `LW_LINKEDIN_CLIENTSECRET` - Your Google Client Secret
+- `LW_LINKEDIN_CLIENTID` - Your LinkedIn Client ID
+- `LW_LINKEDIN_CLIENTSECRET` - Your Linked Client Secret
 
 ## Reddit specific environment variables
 
@@ -116,6 +117,15 @@ must be: `https://login.yourdomain.com/mixer/callback`
 - `LW_MIXER_CLIENTSECRET` - Your Mixer Client Secret
 - `LW_MIXER_SCOPE` - Specify which scopes the authorization request with Mixer should have. Check [Mixer's documentation](https://dev.mixer.com/reference/oauth/index.html#oauth_scopes) for scopes.
 
+
+## Eventbrite specific environment variables
+
+You need to create your own Eventbrite OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL 
+must be: `https://login.yourdomain.com/eventbrite/callback`
+
+- `LW_EVENTBRITE_CLIENTID` - Your Eventbrite Consumer Key
+- `LW_EVENTBRITE_CLIENTSECRET` - Your Eventbrite Consumer Secret
+
 ## Instagram specific environment variables
 
 You need to create your own Instagram OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
@@ -123,6 +133,7 @@ must be: `https://login.yourdomain.com/instagram/callback`
 
 - `LW_INSTAGRAM_CLIENTID` - Your Instagram Client ID
 - `LW_INSTAGRAM_CLIENTSECRET` - Your Instagram Client Secret
+
 
 
 # Endpoints
@@ -134,6 +145,7 @@ must be: `https://login.yourdomain.com/instagram/callback`
 - `/reddit` - login with Reddit account (if configured through env variables)
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
+- `/eventbrite` - login with Eventbrite account (if configured through env variables)
 - `/instagram` - login with Instagram account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
@@ -177,6 +189,8 @@ now lipp/login-with \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	-e LW_EVENTBRITE_CLIENTID=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CLIENTSECRET=@lw-eventbrite-consumersecret \
 	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
 	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 	--alias login.yourdomain.com
@@ -198,6 +212,8 @@ docker run lipp/login-with -p 80:3000 \
 	-e LW_GITHUB_CLIENTSECRET=@lw-github-clientsecret \
 	-e LW_TWITTER_CONSUMERKEY=@lw-twitter-consumerkey \
 	-e LW_TWITTER_CONSUMERSECRET=@lw-twitter-consumersecret \
+	-e LW_EVENTBRITE_CLIENTID=@lw-eventbrite-consumerkey \
+	-e LW_EVENTBRITE_CLIENTSECRET=@lw-eventbrite-consumersecret \
 	-e LW_INSTAGRAM_CLIENTID=@lw-instagram-clientid \
 	-e LW_INSTAGRAM_CLIENTSECRET=@lw-instagram-clientsecret \
 ```

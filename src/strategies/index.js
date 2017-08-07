@@ -6,6 +6,7 @@ const strategies = {
   reddit: require('./reddit'),
   twitter: require('./twitter'),
   mixer: require('./mixer'),
+  eventbrite: require('./eventbrite'),
   linkedin: require('./linkedin'),
   instagram: require('./instagram'),
   test: require('./test')
