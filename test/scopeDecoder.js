@@ -1,7 +1,7 @@
 /* globals describe it */
 const assert = require('assert')
 
-const scopeHandler = require('../src/scopeHandler')
+const scopeDecoder = require('../src/scopeDecoder')
 
 describe('scope handling', () => {
   describe('scope decoding', () => {
@@ -13,12 +13,12 @@ describe('scope handling', () => {
         ['x+y+z', ['x', 'y', 'z']]
       ]
       cases.forEach(testCase => {
-        assert.deepEqual(scopeHandler.decode(testCase[0]), testCase[1])
+        assert.deepEqual(scopeDecoder(testCase[0]), testCase[1])
       })
     })
     it('does not process arrays', () => {
       const testCase = ['x', 'y', 'z']
-      assert.deepEqual(scopeHandler.decode(testCase), testCase)
+      assert.deepEqual(scopeDecoder(testCase), testCase)
     })
   })
 })

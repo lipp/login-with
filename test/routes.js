@@ -65,6 +65,7 @@ describe('the routes module', () => {
         }
       }).onAuthenticationRequest(req, res, next)
     })
+
     describe('scopes', () => {
       it('when configured passes scopes from the querystring to authenticate', done => {
         req.path = '/foo'
@@ -84,6 +85,7 @@ describe('the routes module', () => {
           }
         }).onAuthenticationRequest(req, res, next)
       })
+
       it('ignores scopes in the querystring when not configured', done => {
         req.path = '/foo'
         req.query.scope = 'scope scopeTwo'
