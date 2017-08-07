@@ -1,3 +1,4 @@
+const scopeDecoder = require('../scopeDecoder')
 const strategies = {
   github: require('./github'),
   google: require('./google'),
@@ -17,6 +18,9 @@ module.exports = (env, rootUrl) => Object.keys(strategies)
     const strategy = strategies[type]
     const callbackURL = `${rootUrl}/${type}/callback`
     strategy.config = strategy.getConfig(env, callbackURL)
+    if (strategy.config && strategy.config.scope) {
+      strategy.config.scope = scopeDecoder(strategy.config.scope)
+    }
     strategy.type = type
     return strategy
   })

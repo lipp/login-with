@@ -65,6 +65,43 @@ describe('the routes module', () => {
         }
       }).onAuthenticationRequest(req, res, next)
     })
+
+    describe('scopes', () => {
+      it('when configured passes scopes from the querystring to authenticate', done => {
+        req.path = '/foo'
+        req.query.scope = 'scope scopeTwo'
+        routes({
+          strategies: [{
+            type: 'foo'
+          }],
+          passport: {
+            authenticate: (type, opts) => (_req, _res, _next) => {
+              assert.deepEqual(opts.scope, _req.query.scope.split(' '))
+              done()
+            }
+          },
+          env: {
+            LW_DYNAMIC_SCOPE: 1
+          }
+        }).onAuthenticationRequest(req, res, next)
+      })
+
+      it('ignores scopes in the querystring when not configured', done => {
+        req.path = '/foo'
+        req.query.scope = 'scope scopeTwo'
+        routes({
+          strategies: [{
+            type: 'foo'
+          }],
+          passport: {
+            authenticate: (type, opts) => (_req, _res, _next) => {
+              assert.notEqual(opts.scope, _req.query.scope.split(' '))
+              done()
+            }
+          }
+        }).onAuthenticationRequest(req, res, next)
+      })
+    })
   })
 
   it('onIndex calls res.json({token, profile})', done => {
