@@ -9,6 +9,7 @@ const facebook = require('../src/strategies/facebook')
 const instagram = require('../src/strategies/instagram')
 const mixer = require('../src/strategies/mixer')
 const linkedin = require('../src/strategies/linkedin')
+const strava = require('../src/strategies/strava')
 const assert = require('assert')
 
 describe('the strategies module', () => {
@@ -579,6 +580,50 @@ describe('the strategies module', () => {
           username: 'pop',
           photo: 'asd',
           provider: 'mixer'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('strava', () => {
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_STRAVA_CLIENTID = 123
+      env.LW_STRAVA_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, 'strava')
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: 'https://foo.bar/strava/callback'
+      })
+    })
+
+    it('toUser', done => {
+      const stravaInfo = {
+        provider: 'strava',
+        displayName: 'Foo Bar',
+        username: 'pop',
+        avatar: 'asd'
+      }
+      strava.toUser(123, 345, stravaInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.token, 123)
+        assert.equal(user.tokenSecret, 345)
+        assert.deepEqual(user.profile, {
+          username: 'pop',
+          name: 'Foo Bar',
+          photo: 'asd',
+          provider: 'strava'
         })
         done()
       })

@@ -13,6 +13,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - LinkedIn
 - Instagram
 - Mixer
+- Strava
 - ... more to come (PRs welcome)
 
 You can deploy with [`now`](https://zeit.co/now) or [`Docker`](https://www.docker.com/) (for mandatory and optional env variables see below).
@@ -124,6 +125,14 @@ must be: `https://login.yourdomain.com/instagram/callback`
 - `LW_INSTAGRAM_CLIENTID` - Your Instagram Client ID
 - `LW_INSTAGRAM_CLIENTSECRET` - Your Instagram Client Secret
 
+## Strava specific environment variables
+
+You need to create your own Strava OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
+must be: `https://login.yourdomain.com/strava/callback`
+
+- `LW_STRAVA_CLIENTID` - Your Strava Client ID
+- `LW_STRAVA_CLIENTSECRET` - Your Strava Client Secret
+
 
 # Endpoints
 
@@ -135,6 +144,7 @@ must be: `https://login.yourdomain.com/instagram/callback`
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
 - `/instagram` - login with Instagram account (if configured through env variables)
+- `/strava` - login with Strava account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
