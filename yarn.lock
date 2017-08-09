@@ -1902,6 +1902,14 @@ passport-oauth2@1.x.x:
     uid2 "0.0.x"
     utils-merge "1.x.x"
 
+passport-oauth@0.1.x:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/passport-oauth/-/passport-oauth-0.1.15.tgz#fb74e0afe84614bfa256c5fc716cc56bbfc8cec0"
+  dependencies:
+    oauth "0.9.x"
+    passport "~0.1.1"
+    pkginfo "0.2.x"
+
 passport-oauth@1.x, passport-oauth@~1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-oauth/-/passport-oauth-1.0.0.tgz#90aff63387540f02089af28cdad39ea7f80d77df"
@@ -1920,6 +1928,13 @@ passport-strategy@1.x.x, passport-strategy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
 
+passport-strava@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/passport-strava/-/passport-strava-0.2.0.tgz#d6eeb65b4c68b5c1fb3a3f4c8539504ae5eb8a51"
+  dependencies:
+    passport-oauth "0.1.x"
+    pkginfo "0.2.x"
+
 passport-twitter@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/passport-twitter/-/passport-twitter-1.0.4.tgz#01a799e1f760bf2de49f2ba5fba32282f18932d7"
@@ -1933,6 +1948,13 @@ passport@^0.3.2:
   dependencies:
     passport-strategy "1.x.x"
     pause "0.0.1"
+
+passport@~0.1.1:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/passport/-/passport-0.1.18.tgz#c8264479dcb6414cadbb66752d12b37e0b6525a1"
+  dependencies:
+    pause "0.0.1"
+    pkginfo "0.2.x"
 
 path-exists@^2.0.0:
   version "2.1.0"

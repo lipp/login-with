@@ -8,6 +8,7 @@ const strategies = {
   mixer: require('./mixer'),
   linkedin: require('./linkedin'),
   instagram: require('./instagram'),
+  strava: require('./strava'),
   test: require('./test')
 }
 
@@ -25,4 +26,3 @@ module.exports = (env, rootUrl) => Object.keys(strategies)
     return strategy
   })
   .filter(strategy => isConfigured(strategy))
-
