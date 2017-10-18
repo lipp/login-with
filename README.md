@@ -42,6 +42,10 @@ On successful login two cookies will be created:
 The cookies will be available for your toplevel domain and all subdomains. In addition, the cookie's `secure` flag is set, which means
 that your other websites/webservices must run over `https`.
 
+# Supported by <img src="https://cdn.auth0.com/styleguide/components/1.0.8/media/logos/img/badge.svg" alt="Auth0 logo" width="24" />
+
+If you want to easily add token-based authentication to your apps, feel free to check out Auth0's SDKs and free plan at [auth0.com/overview](https://auth0.com/overview?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=login-with&utm_content=auth).
+
 # Setup
 
 The configuration is done by means of environment variables.
