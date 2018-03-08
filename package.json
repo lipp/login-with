@@ -35,7 +35,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
-    "jsonwebtoken": "^7.2.1",
+    "jsonwebtoken": "^7.4.3",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-github2": "^0.1.10",
