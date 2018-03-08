@@ -63,6 +63,8 @@ The configuration is done by means of environment variables.
 - `LW_PROFILE_COOKIENAME` - The profile's cookie name, defaults to `profile`
 - `LW_JWT_COOKIENAME` - The JSON Web Token's (JWT) cookie name, defaults to `jwt`
 - `LW_DYNAMIC_SCOPE` - When set allows you to customize the scopes used in an authentication request, defaults to off
+- `LW_COOKIE_DOMAIN` - The explicit cookie domain, e.g. `.foo.com`. If not specified this will derive from `LW_SUBDOMAIN`, e.g. if `LW_SUBDOMAIN=login.foo.com` then the cookie domain "defaults" to `.foo.com`. This is ok unless you have multi level subdomain for (`LW_SUBDOMAIN=dev.login.foo.com`).
+In this case you must explicitly set `LW_COOKIE_DOMAIN=.foo.com` as `.login.foo.com` would be the auto guessed value.
 
 ## GitHub specific environment variables
 
