@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-const MemoryStore = require('session-memory-store')(expressSession)
+const MemoryStore = require('memorystore')(expressSession)
 
 const opts = require('./src/opts')(process.argv, process.env)
 
@@ -37,7 +37,9 @@ app.use(expressSession({
   secret: opts.sessionSecret,
   resave: false,
   saveUninitialized: false,
-  store: new MemoryStore()
+  store: new MemoryStore({
+    checkPeriod: 1000 * 60 * 3 // 3 minutes
+  })
 }))
 app.use(passport.initialize())
 
