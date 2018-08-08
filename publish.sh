@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-np
+np --no-yarn
 if [ $? -eq 0 ]
 then
 	version=$(git describe --abbrev=0 --tags | cut -c2-)
