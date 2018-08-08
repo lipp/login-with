@@ -1,6 +1,6 @@
 {
   "name": "login-with-nextjs",
-  "aliases": [
+  "alias": [
     "login-with.com"
   ],
   "env": {
