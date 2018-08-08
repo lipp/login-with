@@ -54,9 +54,9 @@ const Index = ({profile, origin}) => (
       <br />
     </div>
     <div className='deploy has-text-centered'>
-      <h1 className='title is2'>Deploy your own</h1>
-      <div className='notification now'><strong>now</strong> lipp/login-with</div>
-      <div className='notification docker'><strong>docker</strong> pull lipp/login-with</div>
+      <h1 className='title'>Deploy your own</h1>
+      <div className='notification now'><strong>now</strong> lipp/login-with -e LW_FACEBOOK_APPID=...</div>
+      <div className='notification docker'><strong>docker</strong> run lipp/login-with -e LW_FACEBOOK_APPID=...</div>
     </div>
     <style jsx global>{`
       .fa-linkedin {
