@@ -95,8 +95,8 @@ must be: `https://login.yourdomain.com/facebook/callback`
 You need to create your own LinkedIn OAuth2 application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/linkedin/callback`
 
-- `LW_LINKEDIN_CLIENTID` - Your Google Client ID
-- `LW_LINKEDIN_CLIENTSECRET` - Your Google Client Secret
+- `LW_LINKEDIN_CLIENTID` - Your LinkedIn Client ID
+- `LW_LINKEDIN_CLIENTSECRET` - Your LinkedIn Client Secret
 
 ## Reddit specific environment variables
 
