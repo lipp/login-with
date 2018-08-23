@@ -1,8 +1,8 @@
 module.exports = {
   Ctor: require('passport-spotify').Strategy,
   getConfig: (env, callbackURL) => {
-    const clientID = env.LW_SPOTIFY_APPID
-    const clientSecret = env.LW_SPOTIFY_APPSECRET
+    const clientID = env.LW_SPOTIFY_CLIENTID
+    const clientSecret = env.LW_SPOTIFY_CLIENTSECRET
     if (clientID && clientSecret) {
       return {
         clientID,
@@ -11,7 +11,7 @@ module.exports = {
       }
     }
   },
-  toUser: (accessToken, refreshToken, {displayName, photos}, done) => {
+  toUser: (accessToken, refreshToken, { displayName, photos }, done) => {
     done(null, {
       accessToken,
       refreshToken,

@@ -13,6 +13,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - LinkedIn
 - Instagram
 - Mixer
+- Spotify
 - Strava
 - ... more to come (PRs welcome)
 
@@ -131,6 +132,14 @@ must be: `https://login.yourdomain.com/instagram/callback`
 - `LW_INSTAGRAM_CLIENTID` - Your Instagram Client ID
 - `LW_INSTAGRAM_CLIENTSECRET` - Your Instagram Client Secret
 
+## Spotify specific environment variables
+
+You need to create your own Spotify OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` is your Authorization callback URL
+must be: `https://login.yourdomain.com/spotify/callback`
+
+- `LW_SPOTIFY_CLIENTID` - Your Spotify Client ID
+- `LW_SPOTIFY_CLIENTSECRET` - Your Spotify Client Secret
+
 ## Strava specific environment variables
 
 You need to create your own Strava OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
@@ -150,6 +159,7 @@ must be: `https://login.yourdomain.com/strava/callback`
 - `/mixer` - login with Mixer account (if configured through env variables)
 - `/linkedin` - login with LinkedIn account (if configured through env variables)
 - `/instagram` - login with Instagram account (if configured through env variables)
+- `/spotify` - login with Spotify account (if configured through env variables)
 - `/strava` - login with Strava account (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
