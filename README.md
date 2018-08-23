@@ -100,7 +100,7 @@ must be: `https://login.yourdomain.com/linkedin/callback`
 
 ## Reddit specific environment variables
 
-You need to create your own GitHub OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
+You need to create your own Reddit OAuth application. If `LW_SUBDOMAIN=login.yourdomain.com` your Authorization callback URL
 must be: `https://login.yourdomain.com/reddit/callback`
 
 - `LW_REDDIT_CLIENTID` - Your Reddit Client ID
