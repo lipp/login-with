@@ -45,6 +45,7 @@
     "passport-linkedin-oauth2": "^1.5.0",
     "passport-mixer": "^1.0.1",
     "passport-reddit": "^0.2.4",
+    "passport-spotify": "^1.0.1",
     "passport-strategy": "^1.0.0",
     "passport-strava": "^0.2.0",
     "passport-twitter": "^1.0.4"

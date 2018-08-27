@@ -9,6 +9,7 @@ const facebook = require('../src/strategies/facebook')
 const instagram = require('../src/strategies/instagram')
 const mixer = require('../src/strategies/mixer')
 const linkedin = require('../src/strategies/linkedin')
+const spotify = require('../src/strategies/spotify')
 const strava = require('../src/strategies/strava')
 const assert = require('assert')
 
@@ -342,7 +343,7 @@ describe('the strategies module', () => {
       it('ctor sets name to "test"', () => {
         const verify = 123
         const callbackURL = 'foo'
-        const ts = new test.Ctor({callbackURL}, verify)
+        const ts = new test.Ctor({ callbackURL }, verify)
         assert.equal(ts.name, 'test')
         assert.equal(ts._verify, verify)
       })
@@ -350,7 +351,7 @@ describe('the strategies module', () => {
       it('.authenticate once calls verifys this.redirect', done => {
         const callbackURL = 'foo'
         const verify = 123
-        const ts = new test.Ctor({callbackURL}, verify)
+        const ts = new test.Ctor({ callbackURL }, verify)
         const req = {
           session: {}
         }
@@ -366,11 +367,11 @@ describe('the strategies module', () => {
         const verify = (profile, f) => {
           f(null, profile)
         }
-        const ts = new test.Ctor({callbackURL}, verify)
+        const ts = new test.Ctor({ callbackURL }, verify)
         const req = {
           session: {}
         }
-        ts.redirect = () => {}
+        ts.redirect = () => { }
         ts.success = user => {
           assert.deepEqual(user, {
             username: 'foo',
@@ -462,7 +463,7 @@ describe('the strategies module', () => {
         displayName: 'Foo Bar',
         username: 'pop',
         photos: [
-          {value: 'asd'}
+          { value: 'asd' }
         ]
       }
       twitter.toUser(123, 345, twitterInfo, (error, user) => {
@@ -580,6 +581,67 @@ describe('the strategies module', () => {
           username: 'pop',
           photo: 'asd',
           provider: 'mixer'
+        })
+        done()
+      })
+    })
+  })
+
+  describe('spotify', () => {
+    const PROVIDER = 'spotify'
+    let strategies
+    before(() => {
+      const env = {}
+      env.LW_SPOTIFY_CLIENTID = 123
+      env.LW_SPOTIFY_CLIENTSECRET = 432
+      strategies = load(env, rootUrl)
+    })
+
+    it('gets loaded', () => {
+      assert.equal(strategies.length, 1)
+      assert.equal(strategies[0].type, PROVIDER)
+    })
+
+    it('config is correct', () => {
+      assert.deepEqual(strategies[0].config, {
+        clientID: 123,
+        clientSecret: 432,
+        callbackURL: `https://foo.bar/${PROVIDER}/callback`
+      })
+    })
+
+    it('toUser', done => {
+      const spotifyInfo = {
+        provider: PROVIDER,
+        displayName: 'Foo Bar',
+        photos: [{ value: 'asd' }]
+      }
+      spotify.toUser(123, 345, spotifyInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'Foo Bar',
+          photo: 'asd',
+          provider: PROVIDER
+        })
+        done()
+      })
+    })
+
+    it('toUserNoPic', done => {
+      const spotifyInfo = {
+        provider: PROVIDER,
+        displayName: 'Foo Bar'
+      }
+      spotify.toUser(123, 345, spotifyInfo, (error, user) => {
+        assert(!error)
+        assert.equal(user.accessToken, 123)
+        assert.equal(user.refreshToken, 345)
+        assert.deepEqual(user.profile, {
+          username: 'Foo Bar',
+          photo: null,
+          provider: PROVIDER
         })
         done()
       })
