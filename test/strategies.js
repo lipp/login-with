@@ -285,6 +285,7 @@ describe('the strategies module', () => {
 
     it('toUser', done => {
       const googleInfo = {
+        id: '1234567890',
         displayName: 'Foo Bar',
         photos: [{
           value: 'asd'
@@ -295,6 +296,7 @@ describe('the strategies module', () => {
         assert.equal(user.accessToken, 123)
         assert.equal(user.refreshToken, 345)
         assert.deepEqual(user.profile, {
+          id: '1234567890',
           username: 'Foo Bar',
           name: 'Foo Bar',
           photo: 'asd',

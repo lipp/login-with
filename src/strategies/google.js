@@ -20,6 +20,7 @@ module.exports = {
       accessToken,
       refreshToken,
       profile: {
+        id: profile.id,
         username: displayName,
         name: displayName,
         provider: 'google',
