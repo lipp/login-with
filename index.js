@@ -16,7 +16,7 @@ if (!opts.sessionSecret) {
   process.exit(1)
 }
 
-const rootUrl = opts.protocol + '/' + opts.subDomain
+const rootUrl = opts.protocol + '/' + opts.subDomain + ':' + opts.port
 
 console.log(`Using subdomain "${rootUrl}" for callback urls`)
 
