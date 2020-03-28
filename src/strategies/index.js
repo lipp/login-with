@@ -10,6 +10,7 @@ const strategies = {
   spotify: require('./spotify'),
   strava: require('./strava'),
   twitter: require('./twitter'),
+  apple: require('./apple'),
   test: require('./test')
 }
 
