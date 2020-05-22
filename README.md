@@ -15,6 +15,7 @@ Stateless authentication microservice for "login-with" functionality, supporting
 - Mixer
 - Spotify
 - Strava
+- AppleID
 - ... more to come (PRs welcome)
 
 You can deploy with [`now`](https://zeit.co/now) or [`Docker`](https://www.docker.com/) (for mandatory and optional env variables see below).
@@ -148,6 +149,15 @@ must be: `https://login.yourdomain.com/strava/callback`
 - `LW_STRAVA_CLIENTID` - Your Strava Client ID
 - `LW_STRAVA_CLIENTSECRET` - Your Strava Client Secret
 
+## AppleID specific environment variables
+You need to be [Apple Developer](https://developer.apple.com/programs/enroll/):
+
+- `LW_APPLE_TEAMID` - Team ID at your [membership page](https://developer.apple.com/account/#membership)
+- `LW_APPLE_KEYID` -  register [new key](https://developer.apple.com/account/resources/authkeys). Add "Sign in with Apple" capability, download key. **it downloads only once**
+- `LW_APPLE_KEYLOCATION` - path to key file relative to your server
+- `LW_APPLE_SERVICEID` -  register [Services ID](https://developer.apple.com/account/resources/identifiers/list/serviceId)
+- `LW_APPLE_CALLBACK` - enable "Sign in with Apple" capability in service you created, configure your callback url (should be like: https://yourwebsite.com/apple/callback)
+<!-- You probably need to verify ownership of a domain. Just [google](https://www.google.com/search?q=apple-developer-domain-association.txt) -->
 
 # Endpoints
 
@@ -161,6 +171,7 @@ must be: `https://login.yourdomain.com/strava/callback`
 - `/instagram` - login with Instagram account (if configured through env variables)
 - `/spotify` - login with Spotify account (if configured through env variables)
 - `/strava` - login with Strava account (if configured through env variables)
+- `/apple` - login with AppleID (if configured through env variables)
 - `/logout` - logout and clears the respective cookies
 
 All endpoints expect the query parameters:
