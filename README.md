@@ -46,7 +46,7 @@ that your other websites/webservices must run over `https`.
 
 # Supported by
 
-If you want to easily add token-based authentication to your apps, feel free to check out Auth0's SDKs and free plan at [auth0.com/overview](https://auth0.com/overview?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=login-with&utm_content=auth) <img src="https://cdn.auth0.com/styleguide/components/1.0.8/media/logos/img/badge.svg" alt="Auth0 logo" width="20" />.
+If you want to easily add token-based authentication to your apps, feel free to check out Auth0's SDKs and free plan at [auth0.com/developers](https://auth0.com/developers?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=login-with&utm_content=auth) <img src="https://cdn.auth0.com/styleguide/components/1.0.8/media/logos/img/badge.svg" alt="Auth0 logo" width="20" />.
 
 # Setup
 
